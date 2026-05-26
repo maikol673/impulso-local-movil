@@ -69,6 +69,10 @@ class LoginActivity : AppCompatActivity() {
         btnFacebook.setOnClickListener {
             Toast.makeText(this, "Login con Facebook - Próximamente", Toast.LENGTH_SHORT).show()
         }
+
+        tvRegister.setOnClickListener {
+            startActivity(Intent(this, RegisterActivity::class.java))
+        }
     }
 
     private fun performLogin(email: String, password: String) {
