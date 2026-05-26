@@ -24,6 +24,12 @@
             </intent-filter>
         </activity>
 
+        <!-- RegisterActivity para registrarse -->
+        <activity
+            android:name=".RegisterActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
+
         <!-- MainActivity después del login -->
         <activity
             android:name=".MainActivity"
