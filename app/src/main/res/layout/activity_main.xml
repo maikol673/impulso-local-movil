@@ -21,7 +21,7 @@
             android:background="@color/primary"
             app:title="Impulso Local"
             app:titleTextColor="@android:color/white"
-            app:navigationIcon="@drawable/menu"
+            app:navigationIcon="@drawable/ic_menu"
             app:navigationIconTint="@android:color/white" />
 
         <!-- Contenedor para los fragments (Home, etc.) -->
