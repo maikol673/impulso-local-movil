@@ -76,10 +76,28 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun performLogin(email: String, password: String) {
-        if (email == "test@test.com" && password == "123456") {
-            val user = User(1, "Usuario Test", email)
-            SharedPrefManager.getInstance(this).saveUser(user)
+        val sharedPref = getSharedPreferences("impulso_local_prefs", MODE_PRIVATE)
 
+        // Para pruebas: credenciales admin
+        if (email == "admin@test.com" && password == "123456") {
+            sharedPref.edit().apply {
+                putString("user_email", email)
+                putString("user_name", "Administrador")
+                putBoolean("is_admin", true)
+                apply()
+            }
+            Toast.makeText(this, "Login Admin exitoso", Toast.LENGTH_SHORT).show()
+            startActivity(Intent(this, MainActivity::class.java))
+            finish()
+        }
+        // Credenciales normal
+        else if (email == "test@test.com" && password == "123456") {
+            sharedPref.edit().apply {
+                putString("user_email", email)
+                putString("user_name", "Usuario Test")
+                putBoolean("is_admin", false)
+                apply()
+            }
             Toast.makeText(this, "Login exitoso", Toast.LENGTH_SHORT).show()
             startActivity(Intent(this, MainActivity::class.java))
             finish()
