@@ -1,32 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item
-        android:id="@+id/nav_mi_perfil"
-        android:title="Mi Perfil" />
+    <!-- Solo visible cuando NO hay sesión -->
+    <item android:id="@+id/nav_login"
+        android:title="Iniciar Sesión"
+        android:visible="true" />
 
-    <item
-        android:id="@+id/nav_dashboard"
-        android:title="Dashboard" />
+    <!-- Solo visible para ADMIN -->
+    <item android:id="@+id/nav_admin"
+        android:title="Administrador"
+        android:visible="false" />
 
-    <item
-        android:id="@+id/nav_mis_ordenes"
-        android:title="Mis Órdenes" />
+    <!-- Visibles solo cuando hay sesión -->
+    <item android:id="@+id/nav_mi_perfil"
+        android:title="Mi Perfil"
+        android:visible="false" />
 
-    <item
-        android:id="@+id/nav_chat"
-        android:title="Chat" />
+    <item android:id="@+id/nav_dashboard"
+        android:title="Dashboard"
+        android:visible="false" />
 
-    <item
-        android:id="@+id/nav_mi_carrito"
-        android:title="Mi Carrito" />
+    <item android:id="@+id/nav_mis_ordenes"
+        android:title="Mis Órdenes"
+        android:visible="false" />
 
-    <item
-        android:id="@+id/nav_ajustes"
-        android:title="Ajustes" />
+    <item android:id="@+id/nav_chat"
+        android:title="Chat"
+        android:visible="false" />
 
-    <item
-        android:id="@+id/nav_logout"
-        android:title="Cerrar Sesión" />
+    <item android:id="@+id/nav_mi_carrito"
+        android:title="Mi Carrito"
+        android:visible="false" />
+
+    <item android:id="@+id/nav_ajustes"
+        android:title="Ajustes"
+        android:visible="false" />
+
+    <item android:id="@+id/nav_logout"
+        android:title="Cerrar Sesión"
+        android:visible="false" />
 
 </menu>
