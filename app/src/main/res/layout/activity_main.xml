@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true">
 
-    <!-- ✅ Contenido principal como PRIMER hijo -->
+    <!--  Contenido principal como PRIMER hijo -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -30,7 +30,7 @@
 
     </LinearLayout>
 
-    <!-- ✅ NavigationView como SEGUNDO hijo directo del DrawerLayout -->
+    <!--  NavigationView como SEGUNDO hijo directo del DrawerLayout -->
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/navigationView"
         android:layout_width="280dp"
