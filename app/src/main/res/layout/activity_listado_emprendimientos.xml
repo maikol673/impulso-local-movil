@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#f8f9fa">
+
+    <!-- HERO SECTION (igual a Django) -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:padding="32dp"
+        android:background="@drawable/bg_hero_gradient">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Descubre emprendimientos innovadores"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:textColor="#2a5bdc"
+            android:gravity="center"
+            android:layout_marginBottom="12dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Explora proyectos que están transformando el ecosistema emprendedor"
+            android:textSize="14sp"
+            android:textColor="#6c757d"
+            android:gravity="center" />
+
+    </LinearLayout>
+
+    <!-- FILTROS Y BÚSQUEDA (igual a Django) -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="20dp"
+        android:background="@android:color/white"
+        android:elevation="2dp">
+
+        <!-- Search Bar -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="20dp">
+
+            <EditText
+                android:id="@+id/etBuscar"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:layout_weight="1"
+                android:hint="Buscar emprendimientos..."
+                android:padding="12dp"
+                android:background="@drawable/bg_editartexto"
+                android:drawableStart="@drawable/ic_search"
+                android:drawablePadding="12dp" />
+
+            <Button
+                android:id="@+id/btnBuscar"
+                android:layout_width="56dp"
+                android:layout_height="48dp"
+                android:text="🔍"
+                android:backgroundTint="@color/primary"
+                android:layout_marginStart="8dp" />
+
+        </LinearLayout>
+
+        <!-- Filtros de Categorías (Horizontal Scroll) -->
+        <HorizontalScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scrollbars="none">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/chipTodos"
+                    android:layout_width="wrap_content"
+                    android:layout_height="36dp"
+                    android:text="Todos"
+                    android:paddingStart="20dp"
+                    android:paddingEnd="20dp"
+                    android:gravity="center"
+                    android:background="@drawable/bg_chip_selected"
+                    android:textColor="@android:color/white"
+                    android:textSize="14sp"
+                    android:layout_marginEnd="8dp" />
+
+                <TextView
+                    android:id="@+id/chipTecnologia"
+                    android:layout_width="wrap_content"
+                    android:layout_height="36dp"
+                    android:text="Tecnología"
+                    android:paddingStart="20dp"
+                    android:paddingEnd="20dp"
+                    android:gravity="center"
+                    android:background="@drawable/bg_chip"
+                    android:textColor="#6c757d"
+                    android:textSize="14sp"
+                    android:layout_marginEnd="8dp" />
+
+                <TextView
+                    android:id="@+id/chipAlimentos"
+                    android:layout_width="wrap_content"
+                    android:layout_height="36dp"
+                    android:text="Alimentos"
+                    android:paddingStart="20dp"
+                    android:paddingEnd="20dp"
+                    android:gravity="center"
+                    android:background="@drawable/bg_chip"
+                    android:textColor="#6c757d"
+                    android:textSize="14sp"
+                    android:layout_marginEnd="8dp" />
+
+                <TextView
+                    android:id="@+id/chipServicios"
+                    android:layout_width="wrap_content"
+                    android:layout_height="36dp"
+                    android:text="Servicios"
+                    android:paddingStart="20dp"
+                    android:paddingEnd="20dp"
+                    android:gravity="center"
+                    android:background="@drawable/bg_chip"
+                    android:textColor="#6c757d"
+                    android:textSize="14sp"
+                    android:layout_marginEnd="8dp" />
+
+                <TextView
+                    android:id="@+id/chipModa"
+                    android:layout_width="wrap_content"
+                    android:layout_height="36dp"
+                    android:text="Moda"
+                    android:paddingStart="20dp"
+                    android:paddingEnd="20dp"
+                    android:gravity="center"
+                    android:background="@drawable/bg_chip"
+                    android:textColor="#6c757d"
+                    android:textSize="14sp"
+                    android:layout_marginEnd="8dp" />
+
+                <TextView
+                    android:id="@+id/chipArtesanias"
+                    android:layout_width="wrap_content"
+                    android:layout_height="36dp"
+                    android:text="Artesanías"
+                    android:paddingStart="20dp"
+                    android:paddingEnd="20dp"
+                    android:gravity="center"
+                    android:background="@drawable/bg_chip"
+                    android:textColor="#6c757d"
+                    android:textSize="14sp" />
+
+            </LinearLayout>
+
+        </HorizontalScrollView>
+
+    </LinearLayout>
+
+    <!-- LISTADO DE EMPRENDIMIENTOS (RecyclerView) -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvEmprendimientos"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:padding="16dp"
+        android:clipToPadding="false" />
+
+    <!-- PAGINACIÓN -->
+    <LinearLayout
+        android:id="@+id/layoutPaginacion"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:padding="16dp"
+        android:visibility="gone">
+
+        <Button
+            android:id="@+id/btnPagAnterior"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:text="←"
+            android:backgroundTint="@android:color/white"
+            android:textColor="@color/text_primary"
+            android:layout_marginEnd="8dp" />
+
+        <TextView
+            android:id="@+id/tvPaginaActual"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:text="1"
+            android:gravity="center"
+            android:background="@drawable/bg_chip_selected"
+            android:textColor="@android:color/white"
+            android:layout_marginEnd="8dp" />
+
+        <Button
+            android:id="@+id/btnPagSiguiente"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:text="→"
+            android:backgroundTint="@android:color/white"
+            android:textColor="@color/text_primary" />
+
+    </LinearLayout>
+
+</LinearLayout>
