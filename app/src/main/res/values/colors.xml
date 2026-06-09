@@ -17,4 +17,5 @@
     <color name="success">#28a745</color>
     <color name="error">#dc3545</color>
     <color name="gray_light_bg">#f8f9fa</color>
+    <color name="dark">#212529</color>
 </resources>
