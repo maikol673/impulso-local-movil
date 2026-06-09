@@ -149,6 +149,7 @@
                 android:backgroundTint="@color/gray_light"
                 android:textColor="@color/text_primary"
                 app:icon="@drawable/ic_google"
+                app:iconTint="@null"
                 app:iconGravity="textStart" />
 
             <com.google.android.material.button.MaterialButton
@@ -161,6 +162,7 @@
                 android:backgroundTint="@color/gray_light"
                 android:textColor="@color/text_primary"
                 app:icon="@drawable/ic_facebook"
+                app:iconTint="@null"
                 app:iconGravity="textStart" />
 
         </LinearLayout>
@@ -170,8 +172,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:gravity="center"
-            android:layout_marginTop="16dp">
+            android:gravity="center">
 
             <TextView
                 android:layout_width="wrap_content"

@@ -6,7 +6,17 @@
     android:orientation="vertical"
     android:background="#f8f9fa">
 
-    <!-- HERO SECTION (igual a Django) -->
+    <!-- Toolbar -->
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/primary"
+        app:titleTextColor="@android:color/white"
+        app:navigationIcon="@drawable/ic_back"
+        app:navigationIconTint="@android:color/white" />
+
+    <!-- Hero Section -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -35,12 +45,12 @@
 
     </LinearLayout>
 
-    <!-- FILTROS Y BÚSQUEDA (igual a Django) -->
+    <!-- Filtros y búsqueda -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="20dp"
+        android:padding="16dp"
         android:background="@android:color/white"
         android:elevation="2dp">
 
@@ -49,14 +59,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_marginBottom="20dp">
+            android:layout_marginBottom="16dp">
 
             <EditText
                 android:id="@+id/etBuscar"
                 android:layout_width="0dp"
                 android:layout_height="48dp"
                 android:layout_weight="1"
-                android:hint="Buscar emprendimientos..."
+                android:hint="Buscar "
                 android:padding="12dp"
                 android:background="@drawable/bg_editartexto"
                 android:drawableStart="@drawable/ic_search"
@@ -72,7 +82,7 @@
 
         </LinearLayout>
 
-        <!-- Filtros de Categorías (Horizontal Scroll) -->
+        <!-- Filtros categorías -->
         <HorizontalScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -166,52 +176,12 @@
 
     </LinearLayout>
 
-    <!-- LISTADO DE EMPRENDIMIENTOS (RecyclerView) -->
+    <!-- RecyclerView -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvEmprendimientos"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:padding="16dp"
+        android:layout_height="match_parent"
+        android:padding="12dp"
         android:clipToPadding="false" />
-
-    <!-- PAGINACIÓN -->
-    <LinearLayout
-        android:id="@+id/layoutPaginacion"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center"
-        android:padding="16dp"
-        android:visibility="gone">
-
-        <Button
-            android:id="@+id/btnPagAnterior"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:text="←"
-            android:backgroundTint="@android:color/white"
-            android:textColor="@color/text_primary"
-            android:layout_marginEnd="8dp" />
-
-        <TextView
-            android:id="@+id/tvPaginaActual"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:text="1"
-            android:gravity="center"
-            android:background="@drawable/bg_chip_selected"
-            android:textColor="@android:color/white"
-            android:layout_marginEnd="8dp" />
-
-        <Button
-            android:id="@+id/btnPagSiguiente"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:text="→"
-            android:backgroundTint="@android:color/white"
-            android:textColor="@color/text_primary" />
-
-    </LinearLayout>
 
 </LinearLayout>
