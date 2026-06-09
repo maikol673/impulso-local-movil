@@ -87,6 +87,7 @@ class MainActivity : AppCompatActivity() {
             drawerLayout.closeDrawer(GravityCompat.START)
             true
         }
+        navigationView.itemIconTintList = null
 
 
         onBackPressedDispatcher.addCallback(this) {

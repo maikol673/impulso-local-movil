@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
         android:id="@+id/navAdminDashboard"
@@ -8,8 +9,11 @@
 
     <item
         android:id="@+id/navAdminUsuarios"
+        android:title="Usuarios"
         android:icon="@drawable/ic_users"
-        android:title="Usuarios" />
+        app:showAsAction="always"
+
+         />
 
     <item
         android:id="@+id/navAdminModeracion"
