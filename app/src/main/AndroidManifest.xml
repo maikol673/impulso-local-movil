@@ -41,6 +41,12 @@
             android:parentActivityName=".MainActivity"
             android:exported="false" />
 
+        <!-- detalle emprendimientos-->
+        <activity
+            android:name=".DetalleEmprendimientoActivity"
+            android:parentActivityName=".ListadoEmprendimientosActivity"
+            android:exported="false" />
+
     </application>
 
 </manifest>

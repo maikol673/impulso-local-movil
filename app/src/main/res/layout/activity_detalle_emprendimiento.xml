@@ -9,448 +9,477 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="16dp">
+        android:orientation="vertical">
 
-        <!-- Botón Volver -->
-        <Button
-            android:id="@+id/btnVolver"
-            android:layout_width="wrap_content"
-            android:layout_height="40dp"
-            android:text="← Volver"
-            android:backgroundTint="@color/gray_light"
-            android:textColor="@color/text_primary"
-            android:layout_marginBottom="16dp"
-            style="@style/Widget.Material3.Button.TextButton" />
+        <!-- Toolbar -->
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/primary"
+            app:titleTextColor="@android:color/white"
+            app:navigationIcon="@drawable/ic_back"
+            app:navigationIconTint="@android:color/white" />
 
-        <!-- COLUMNA IZQUIERDA (Card Principal) -->
-        <com.google.android.material.card.MaterialCardView
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:cardCornerRadius="12dp"
-            app:cardElevation="2dp"
-            android:layout_marginBottom="16dp">
+            android:orientation="vertical"
+            android:padding="16dp">
 
-            <LinearLayout
+            <!-- COLUMNA IZQUIERDA (Card Principal) -->
+            <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="16dp">
+                app:cardCornerRadius="12dp"
+                app:cardElevation="2dp"
+                android:layout_marginBottom="16dp">
 
-                <!-- IMAGEN PRINCIPAL -->
-                <ImageView
-                    android:id="@+id/ivImagen"
-                    android:layout_width="match_parent"
-                    android:layout_height="220dp"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/ic_placeholder_large"
-                    android:layout_marginBottom="16dp" />
-
-                <!-- TÍTULO -->
-                <TextView
-                    android:id="@+id/tvNombre"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="GreenTech Solutions"
-                    android:textSize="22sp"
-                    android:textStyle="bold"
-                    android:textColor="@color/text_primary"
-                    android:layout_gravity="center"
-                    android:layout_marginBottom="12dp" />
-
-                <!-- Categoría (Badge) -->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:layout_marginBottom="12dp">
+                    android:orientation="vertical"
+                    android:padding="16dp">
 
+                    <!-- IMAGEN PRINCIPAL con etiqueta destacado/nuevo -->
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="220dp"
+                        android:background="@color/gray_light"
+                        android:layout_marginBottom="16dp">
+
+                        <ImageView
+                            android:id="@+id/ivImagen"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/ic_placeholder_large" />
+
+                        <!-- ETIQUETA DESTACADO/NUEVO (igual a Django) -->
+                        <TextView
+                            android:id="@+id/tvDestacado"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Destacado"
+                            android:paddingStart="12dp"
+                            android:paddingEnd="12dp"
+                            android:paddingTop="6dp"
+                            android:paddingBottom="6dp"
+                            android:background="@drawable/bg_etiqueta_destacado"
+                            android:textColor="@android:color/white"
+                            android:textSize="12sp"
+                            android:textStyle="bold"
+                            android:layout_margin="12dp"
+                            android:layout_gravity="end"
+                            android:visibility="gone" />
+
+                    </FrameLayout>
+
+                    <!-- TÍTULO -->
                     <TextView
-                        android:id="@+id/tvCategoria"
+                        android:id="@+id/tvNombre"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Tecnología"
-                        android:paddingStart="16dp"
-                        android:paddingEnd="16dp"
-                        android:paddingTop="8dp"
-                        android:paddingBottom="8dp"
-                        android:background="@drawable/bg_etiqueta_destacado"
-                        android:textColor="@android:color/white"
-                        android:textSize="14sp"
-                        android:textStyle="bold" />
-
-                </LinearLayout>
-
-                <!-- CALIFICACIÓN -->
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:layout_marginBottom="8dp">
-
-                    <TextView
-                        android:id="@+id/tvRating"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="⭐ 4.5"
-                        android:textSize="16sp"
-                        android:textColor="@color/text_primary" />
-
-                    <TextView
-                        android:id="@+id/tvNumResenas"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="(0 reseñas)"
-                        android:textSize="13sp"
-                        android:textColor="@color/text_secondary"
-                        android:layout_marginStart="8dp" />
-
-                </LinearLayout>
-
-                <!-- UBICACIÓN -->
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:layout_marginBottom="16dp">
-
-                    <TextView
-                        android:id="@+id/tvUbicacion"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="📍 Ubicación no especificada"
-                        android:textSize="13sp"
-                        android:textColor="@color/text_secondary" />
-
-                </LinearLayout>
-
-                <!-- Botón Dejar Reseña -->
-                <Button
-                    android:id="@+id/btnDejarResena"
-                    android:layout_width="match_parent"
-                    android:layout_height="44dp"
-                    android:text="⭐ Dejar Reseña"
-                    android:backgroundTint="@color/warning"
-                    android:textColor="@android:color/white"
-                    android:textStyle="bold"
-                    android:layout_marginBottom="16dp" />
-
-                <!-- ACCIONES: Me Gusta, Contactar, Seguir -->
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginBottom="16dp">
-
-                    <Button
-                        android:id="@+id/btnMeGusta"
-                        android:layout_width="0dp"
-                        android:layout_height="44dp"
-                        android:layout_weight="1"
-                        android:text="🤍 Me Gusta"
-                        android:backgroundTint="@color/gray_light"
+                        android:text="GreenTech Solutions"
+                        android:textSize="22sp"
+                        android:textStyle="bold"
                         android:textColor="@color/text_primary"
-                        android:layout_marginEnd="8dp" />
+                        android:layout_gravity="center"
+                        android:layout_marginBottom="12dp" />
 
+                    <!-- Categoría (Badge) -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:layout_marginBottom="12dp">
+
+                        <TextView
+                            android:id="@+id/tvCategoria"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Tecnología"
+                            android:paddingStart="16dp"
+                            android:paddingEnd="16dp"
+                            android:paddingTop="8dp"
+                            android:paddingBottom="8dp"
+                            android:background="@drawable/bg_etiqueta_destacado"
+                            android:textColor="@android:color/white"
+                            android:textSize="14sp"
+                            android:textStyle="bold" />
+
+                    </LinearLayout>
+
+                    <!-- CALIFICACIÓN -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:layout_marginBottom="12dp">
+
+                        <TextView
+                            android:id="@+id/tvRating"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="⭐ 4.8"
+                            android:textSize="16sp"
+                            android:textColor="@color/text_primary" />
+
+                        <TextView
+                            android:id="@+id/tvNumResenas"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="(120 reseñas)"
+                            android:textSize="13sp"
+                            android:textColor="@color/text_secondary"
+                            android:layout_marginStart="8dp" />
+
+                    </LinearLayout>
+
+                    <!-- UBICACIÓN -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:layout_marginBottom="16dp">
+
+                        <TextView
+                            android:id="@+id/tvUbicacion"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="📍 Bogotá, Colombia"
+                            android:textSize="14sp"
+                            android:textColor="@color/text_secondary" />
+
+                    </LinearLayout>
+
+                    <!-- Botón Dejar Reseña -->
                     <Button
-                        android:id="@+id/btnContactar"
-                        android:layout_width="0dp"
+                        android:id="@+id/btnDejarResena"
+                        android:layout_width="match_parent"
                         android:layout_height="44dp"
-                        android:layout_weight="1"
-                        android:text="📞 Contactar"
-                        android:backgroundTint="@color/primary"
-                        android:textColor="@android:color/white"
-                        android:layout_marginStart="8dp" />
-
-                </LinearLayout>
-
-                <Button
-                    android:id="@+id/btnSeguir"
-                    android:layout_width="match_parent"
-                    android:layout_height="44dp"
-                    android:text="👤 Seguir"
-                    android:backgroundTint="@color/gray_light"
-                    android:textColor="@color/text_primary"
-                    android:layout_marginBottom="16dp" />
-
-                <!-- OPCIONES DE EDICIÓN (solo para el dueño) -->
-                <LinearLayout
-                    android:id="@+id/layoutEdicion"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:visibility="gone">
-
-                    <Button
-                        android:id="@+id/btnEditar"
-                        android:layout_width="0dp"
-                        android:layout_height="44dp"
-                        android:layout_weight="1"
-                        android:text="✏ Editar"
+                        android:text="⭐ Dejar Reseña"
                         android:backgroundTint="@color/warning"
                         android:textColor="@android:color/white"
-                        android:layout_marginEnd="8dp" />
+                        android:textStyle="bold"
+                        android:layout_marginBottom="16dp" />
+
+                    <!-- ACCIONES: Me Gusta, Contactar -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginBottom="12dp">
+
+                        <Button
+                            android:id="@+id/btnMeGusta"
+                            android:layout_width="0dp"
+                            android:layout_height="44dp"
+                            android:layout_weight="1"
+                            android:text="🤍 Me Gusta"
+                            android:backgroundTint="@color/gray_light"
+                            android:textColor="@color/text_primary"
+                            android:layout_marginEnd="8dp" />
+
+                        <Button
+                            android:id="@+id/btnContactar"
+                            android:layout_width="0dp"
+                            android:layout_height="44dp"
+                            android:layout_weight="1"
+                            android:text="📞 Contactar"
+                            android:backgroundTint="@color/primary"
+                            android:textColor="@android:color/white"
+                            android:layout_marginStart="8dp" />
+
+                    </LinearLayout>
 
                     <Button
-                        android:id="@+id/btnEliminar"
-                        android:layout_width="0dp"
+                        android:id="@+id/btnSeguir"
+                        android:layout_width="match_parent"
                         android:layout_height="44dp"
-                        android:layout_weight="1"
-                        android:text="🗑 Eliminar"
-                        android:backgroundTint="@color/error"
-                        android:textColor="@android:color/white"
-                        android:layout_marginStart="8dp" />
+                        android:text="👤 Seguir"
+                        android:backgroundTint="@color/gray_light"
+                        android:textColor="@color/text_primary"
+                        android:layout_marginBottom="16dp" />
+
+                    <!-- OPCIONES DE EDICIÓN (solo para el dueño) -->
+                    <LinearLayout
+                        android:id="@+id/layoutEdicion"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:visibility="gone">
+
+                        <Button
+                            android:id="@+id/btnEditar"
+                            android:layout_width="0dp"
+                            android:layout_height="44dp"
+                            android:layout_weight="1"
+                            android:text="✏ Editar"
+                            android:backgroundTint="@color/warning"
+                            android:textColor="@android:color/white"
+                            android:layout_marginEnd="8dp" />
+
+                        <Button
+                            android:id="@+id/btnEliminar"
+                            android:layout_width="0dp"
+                            android:layout_height="44dp"
+                            android:layout_weight="1"
+                            android:text="🗑 Eliminar"
+                            android:backgroundTint="@color/error"
+                            android:textColor="@android:color/white"
+                            android:layout_marginStart="8dp" />
+
+                    </LinearLayout>
 
                 </LinearLayout>
 
-            </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
 
-        </com.google.android.material.card.MaterialCardView>
-
-        <!-- DESCRIPCIÓN -->
-        <com.google.android.material.card.MaterialCardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:cardCornerRadius="12dp"
-            app:cardElevation="2dp"
-            android:layout_marginBottom="16dp">
-
-            <LinearLayout
+            <!-- DESCRIPCIÓN -->
+            <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="16dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="📄 Descripción"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
-                    android:textColor="@color/text_primary"
-                    android:layout_marginBottom="12dp" />
-
-                <TextView
-                    android:id="@+id/tvDescripcion"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Descripción del emprendimiento..."
-                    android:textSize="14sp"
-                    android:textColor="@color/text_secondary"
-                    android:lineHeight="22sp" />
-
-            </LinearLayout>
-
-        </com.google.android.material.card.MaterialCardView>
-
-        <!-- CONTACTO -->
-        <com.google.android.material.card.MaterialCardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:cardCornerRadius="12dp"
-            app:cardElevation="2dp"
-            android:layout_marginBottom="16dp">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="16dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="📞 Contacto"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
-                    android:textColor="@color/text_primary"
-                    android:layout_marginBottom="12dp" />
-
-                <TextView
-                    android:id="@+id/tvEmail"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="✉ Email: contacto@ejemplo.com"
-                    android:textSize="14sp"
-                    android:textColor="@color/text_secondary"
-                    android:layout_marginBottom="8dp" />
-
-                <TextView
-                    android:id="@+id/tvTelefono"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="📱 Teléfono: +57 300 123 4567"
-                    android:textSize="14sp"
-                    android:textColor="@color/text_secondary"
-                    android:layout_marginBottom="8dp" />
-
-                <TextView
-                    android:id="@+id/tvSitioWeb"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="🌐 Web: www.ejemplo.com"
-                    android:textSize="14sp"
-                    android:textColor="@color/text_secondary"
-                    android:layout_marginBottom="16dp" />
-
-                <!-- Botones de contacto rápido -->
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <Button
-                        android:id="@+id/btnWhatsApp"
-                        android:layout_width="0dp"
-                        android:layout_height="40dp"
-                        android:layout_weight="1"
-                        android:text="📱 WhatsApp"
-                        android:backgroundTint="@color/success"
-                        android:textColor="@android:color/white"
-                        android:textSize="12sp"
-                        android:layout_marginEnd="8dp" />
-
-                    <Button
-                        android:id="@+id/btnEmailContacto"
-                        android:layout_width="0dp"
-                        android:layout_height="40dp"
-                        android:layout_weight="1"
-                        android:text="✉ Email"
-                        android:backgroundTint="@color/primary"
-                        android:textColor="@android:color/white"
-                        android:textSize="12sp" />
-
-                </LinearLayout>
-
-            </LinearLayout>
-
-        </com.google.android.material.card.MaterialCardView>
-
-        <!-- PRODUCTOS -->
-        <com.google.android.material.card.MaterialCardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:cardCornerRadius="12dp"
-            app:cardElevation="2dp"
-            android:layout_marginBottom="16dp">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
+                app:cardCornerRadius="12dp"
+                app:cardElevation="2dp"
+                android:layout_marginBottom="16dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:padding="16dp"
-                    android:background="@color/info"
-                    android:gravity="center_vertical">
+                    android:orientation="vertical"
+                    android:padding="16dp">
 
                     <TextView
-                        android:layout_width="0dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="🛍 Productos"
+                        android:text="📄 Descripción"
                         android:textSize="18sp"
                         android:textStyle="bold"
-                        android:textColor="@android:color/white" />
+                        android:textColor="@color/text_primary"
+                        android:layout_marginBottom="12dp" />
 
-                    <Button
-                        android:id="@+id/btnAgregarProducto"
+                    <TextView
+                        android:id="@+id/tvDescripcion"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Soluciones tecnológicas para agricultura urbana y reducción de huella de carbono."
+                        android:textSize="14sp"
+                        android:textColor="@color/text_secondary"
+                        android:lineHeight="22sp" />
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- CONTACTO -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="2dp"
+                android:layout_marginBottom="16dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <TextView
                         android:layout_width="wrap_content"
-                        android:layout_height="36dp"
-                        android:text="➕ Agregar"
-                        android:backgroundTint="@color/success"
-                        android:textColor="@android:color/white"
-                        android:textSize="12sp"
+                        android:layout_height="wrap_content"
+                        android:text="📞 Contacto"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/text_primary"
+                        android:layout_marginBottom="12dp" />
+
+                    <TextView
+                        android:id="@+id/tvEmail"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="✉ Email: contacto@greentech.com"
+                        android:textSize="13sp"
+                        android:textColor="@color/text_secondary"
+                        android:layout_marginBottom="8dp" />
+
+                    <TextView
+                        android:id="@+id/tvTelefono"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="📱 Teléfono: +57 300 123 4567"
+                        android:textSize="13sp"
+                        android:textColor="@color/text_secondary"
+                        android:layout_marginBottom="8dp" />
+
+                    <TextView
+                        android:id="@+id/tvSitioWeb"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="🌐 Web: www.greentech.com"
+                        android:textSize="13sp"
+                        android:textColor="@color/text_secondary"
+                        android:layout_marginBottom="16dp" />
+
+                    <!-- Botones de contacto rápido -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <Button
+                            android:id="@+id/btnWhatsApp"
+                            android:layout_width="0dp"
+                            android:layout_height="40dp"
+                            android:layout_weight="1"
+                            android:text="📱 WhatsApp"
+                            android:backgroundTint="@color/success"
+                            android:textColor="@android:color/white"
+                            android:textSize="12sp"
+                            android:layout_marginEnd="8dp" />
+
+                        <Button
+                            android:id="@+id/btnEmailContacto"
+                            android:layout_width="0dp"
+                            android:layout_height="40dp"
+                            android:layout_weight="1"
+                            android:text="✉ Email"
+                            android:backgroundTint="@color/primary"
+                            android:textColor="@android:color/white"
+                            android:textSize="12sp" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- PRODUCTOS -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="2dp"
+                android:layout_marginBottom="16dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:padding="16dp"
+                        android:background="@color/info"
+                        android:gravity="center_vertical">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="🛍 Productos"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            android:textColor="@android:color/white" />
+
+                        <Button
+                            android:id="@+id/btnAgregarProducto"
+                            android:layout_width="wrap_content"
+                            android:layout_height="32dp"
+                            android:text="➕ Agregar"
+                            android:backgroundTint="@color/success"
+                            android:textColor="@android:color/white"
+                            android:textSize="11sp"
+                            android:visibility="gone" />
+
+                    </LinearLayout>
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rvProductos"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="12dp"
+                        android:clipToPadding="false" />
+
+                    <TextView
+                        android:id="@+id/tvNoProductos"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Aún no hay productos disponibles."
+                        android:textSize="13sp"
+                        android:textColor="@color/text_secondary"
+                        android:gravity="center"
+                        android:padding="24dp"
                         android:visibility="gone" />
 
                 </LinearLayout>
 
-                <!-- RecyclerView para productos -->
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rvProductos"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="12dp"
-                    android:clipToPadding="false" />
+            </com.google.android.material.card.MaterialCardView>
 
-                <TextView
-                    android:id="@+id/tvNoProductos"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Aún no hay productos disponibles."
-                    android:textSize="14sp"
-                    android:textColor="@color/text_secondary"
-                    android:gravity="center"
-                    android:padding="24dp"
-                    android:visibility="gone" />
-
-            </LinearLayout>
-
-        </com.google.android.material.card.MaterialCardView>
-
-        <!-- RESEÑAS -->
-        <com.google.android.material.card.MaterialCardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:cardCornerRadius="12dp"
-            app:cardElevation="2dp">
-
-            <LinearLayout
+            <!-- RESEÑAS -->
+            <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="16dp">
+                app:cardCornerRadius="12dp"
+                app:cardElevation="2dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:gravity="center_vertical"
-                    android:layout_marginBottom="16dp">
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:layout_marginBottom="16dp">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="⭐ Reseñas (0)"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            android:textColor="@color/text_primary" />
+
+                        <Button
+                            android:id="@+id/btnEscribirResena"
+                            android:layout_width="wrap_content"
+                            android:layout_height="32dp"
+                            android:text="✍️ Escribir"
+                            android:backgroundTint="@color/warning"
+                            android:textColor="@android:color/white"
+                            android:textSize="11sp" />
+
+                    </LinearLayout>
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rvResenas"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
 
                     <TextView
-                        android:layout_width="0dp"
+                        android:id="@+id/tvNoResenas"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="⭐ Reseñas (0)"
-                        android:textSize="18sp"
-                        android:textStyle="bold"
-                        android:textColor="@color/text_primary" />
-
-                    <Button
-                        android:id="@+id/btnEscribirResena"
-                        android:layout_width="wrap_content"
-                        android:layout_height="36dp"
-                        android:text="✍️ Escribir"
-                        android:backgroundTint="@color/warning"
-                        android:textColor="@android:color/white"
-                        android:textSize="12sp" />
+                        android:text="Aún no hay reseñas. ¡Sé el primero en compartir tu experiencia!"
+                        android:textSize="13sp"
+                        android:textColor="@color/text_secondary"
+                        android:gravity="center"
+                        android:padding="24dp"
+                        android:visibility="gone" />
 
                 </LinearLayout>
 
-                <!-- RecyclerView para reseñas -->
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rvResenas"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+            </com.google.android.material.card.MaterialCardView>
 
-                <TextView
-                    android:id="@+id/tvNoResenas"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Aún no hay reseñas. ¡Sé el primero en compartir tu experiencia!"
-                    android:textSize="14sp"
-                    android:textColor="@color/text_secondary"
-                    android:gravity="center"
-                    android:padding="24dp"
-                    android:visibility="gone" />
-
-            </LinearLayout>
-
-        </com.google.android.material.card.MaterialCardView>
+        </LinearLayout>
 
     </LinearLayout>
 
