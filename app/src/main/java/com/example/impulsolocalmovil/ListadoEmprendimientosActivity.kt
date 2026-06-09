@@ -1,5 +1,7 @@
 package com.example.impulsolocalmovil
 
+
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
@@ -61,7 +63,9 @@ class ListadoEmprendimientosActivity : AppCompatActivity() {
 
     private fun setupRecyclerView() {
         adapter = EmprendimientoAdapter(emptyList()) { emprendimiento ->
-            // TODO: Navegar a detalle
+            val intent = Intent(this, DetalleEmprendimientoActivity::class.java)
+            intent.putExtra("emprendimiento", emprendimiento)
+            startActivity(intent)
         }
         rvEmprendimientos.layoutManager = LinearLayoutManager(this)
         rvEmprendimientos.adapter = adapter
