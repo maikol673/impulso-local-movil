@@ -54,6 +54,7 @@ class MainActivity : AppCompatActivity() {
         menu.findItem(R.id.nav_admin)?.isVisible = (isLoggedIn && isAdmin)
         menu.findItem(R.id.nav_mi_perfil)?.isVisible = isLoggedIn
         menu.findItem(R.id.nav_mis_emprendimientos)?.isVisible = isLoggedIn
+        menu.findItem(R.id.nav_mis_favoritos)?.isVisible = isLoggedIn
         menu.findItem(R.id.nav_dashboard)?.isVisible = isLoggedIn
         menu.findItem(R.id.nav_mis_ordenes)?.isVisible = isLoggedIn
         menu.findItem(R.id.nav_chat)?.isVisible = isLoggedIn
@@ -80,6 +81,11 @@ class MainActivity : AppCompatActivity() {
                 R.id.nav_mis_emprendimientos -> {
                     startActivity(Intent(this, MisEmprendimientosActivity::class.java))
                 }
+
+                R.id.nav_mis_favoritos -> {
+                    startActivity(Intent(this, MisFavoritosActivity::class.java))
+                }
+
                 R.id.nav_dashboard -> {
                     cargarFragment(HomeFragment())
                 }

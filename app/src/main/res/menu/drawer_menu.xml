@@ -21,6 +21,11 @@
         android:title="Mis Emprendimientos"
         android:visible="false" />
 
+    <item
+        android:id="@+id/nav_mis_favoritos"
+        android:title="Mis Favoritos"
+        android:visible="false" />
+
     <item android:id="@+id/nav_dashboard"
         android:title="Dashboard"
         android:visible="false" />
