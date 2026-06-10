@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.example.impulsolocalmovil.ListadoEmprendimientosActivity
+import com.example.impulsolocalmovil.PublicarEmprendimientoActivity
 import com.example.impulsolocalmovil.R
 
 class HomeFragment : Fragment() {
@@ -41,7 +42,8 @@ class HomeFragment : Fragment() {
         }
 
         btnPublicar.setOnClickListener {
-            // TODO: Navegar a Publicar Emprendimiento
+            val intent = Intent(requireContext(), PublicarEmprendimientoActivity::class.java)
+            startActivity(intent)
         }
 
         btnAgregarTestimonio.setOnClickListener {
