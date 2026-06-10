@@ -26,6 +26,11 @@
         android:title="Mis Favoritos"
         android:visible="false" />
 
+    <item
+        android:id="@+id/nav_mis_cursos"
+        android:title="Mis Cursos"
+        android:visible="false" />
+
     <item android:id="@+id/nav_dashboard"
         android:title="Dashboard"
         android:visible="false" />
