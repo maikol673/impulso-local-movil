@@ -60,6 +60,7 @@ class MainActivity : AppCompatActivity() {
         menu.findItem(R.id.nav_chat)?.isVisible = isLoggedIn
         menu.findItem(R.id.nav_mi_carrito)?.isVisible = isLoggedIn
         menu.findItem(R.id.nav_ajustes)?.isVisible = isLoggedIn
+        menu.findItem(R.id.nav_mis_cursos)?.isVisible = isLoggedIn
 
         navigationView.setNavigationItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
@@ -84,6 +85,10 @@ class MainActivity : AppCompatActivity() {
 
                 R.id.nav_mis_favoritos -> {
                     startActivity(Intent(this, MisFavoritosActivity::class.java))
+                }
+
+                R.id.nav_mis_cursos -> {
+                    startActivity(Intent(this, MisCursosActivity::class.java))
                 }
 
                 R.id.nav_dashboard -> {
