@@ -9,14 +9,198 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="16dp">
+        android:orientation="vertical">
 
-        <!-- COLUMNA IZQUIERDA (Mis Emprendimientos + Mis Cursos) -->
+        <!-- Toolbar -->
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/primary"
+            app:titleTextColor="@android:color/white"
+            app:navigationIcon="@drawable/ic_back"
+            app:navigationIconTint="@android:color/white" />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <!-- Header Perfil -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="2dp"
+                android:layout_marginBottom="16dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="20dp"
+                    android:gravity="center">
+
+                    <!-- Avatar -->
+                    <FrameLayout
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:background="@drawable/bg_circle_primary"
+                        android:layout_marginBottom="12dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="👤"
+                            android:textSize="40sp"
+                            android:layout_gravity="center" />
+
+                    </FrameLayout>
+
+                    <!-- Nombre -->
+                    <TextView
+                        android:id="@+id/tvNombrePerfil"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Usuario Demo"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/text_primary" />
+
+                    <!-- Email -->
+                    <TextView
+                        android:id="@+id/tvEmailPerfil"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="usuario@demo.com"
+                        android:textSize="14sp"
+                        android:textColor="@color/text_secondary" />
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Métricas -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="2dp"
+                android:layout_marginBottom="16dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="12dp"
+                        android:background="@color/primary"
+                        android:gravity="center_vertical">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="📊 Métricas"
+                            android:textSize="14sp"
+                            android:textStyle="bold"
+                            android:textColor="@android:color/white" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:padding="20dp">
+
+                        <!-- Emprendimientos -->
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical"
+                            android:gravity="center">
+
+                            <TextView
+                                android:id="@+id/tvTotalEmprendimientos"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="0"
+                                android:textSize="24sp"
+                                android:textStyle="bold"
+                                android:textColor="@color/primary" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Emprendimientos"
+                                android:textSize="11sp"
+                                android:textColor="@color/text_secondary" />
+
+                        </LinearLayout>
+
+                        <!-- Me Encanta -->
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical"
+                            android:gravity="center">
+
+                            <TextView
+                                android:id="@+id/tvTotalMeEncanta"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="0"
+                                android:textSize="24sp"
+                                android:textStyle="bold"
+                                android:textColor="@color/error" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Me Encanta"
+                                android:textSize="11sp"
+                                android:textColor="@color/text_secondary" />
+
+                        </LinearLayout>
+
+                        <!-- Ventas -->
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical"
+                            android:gravity="center">
+
+                            <TextView
+                                android:id="@+id/tvTotalVentas"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="0"
+                                android:textSize="24sp"
+                                android:textStyle="bold"
+                                android:textColor="@color/success" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Ventas"
+                                android:textSize="11sp"
+                                android:textColor="@color/text_secondary" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
 
             <!-- Mis Emprendimientos -->
             <com.google.android.material.card.MaterialCardView
@@ -31,381 +215,10 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
 
-                    <!-- Header -->
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:padding="16dp"
-                        android:background="@color/primary"
-                        android:gravity="center_vertical">
-
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text="🏢 Mis Emprendimientos"
-                            android:textSize="16sp"
-                            android:textStyle="bold"
-                            android:textColor="@android:color/white" />
-
-                    </LinearLayout>
-
-                    <!-- Content -->
-                    <LinearLayout
-                        android:id="@+id/layoutMisEmprendimientos"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:padding="12dp">
-
-                        <!-- RecyclerView para emprendimientos -->
-                        <androidx.recyclerview.widget.RecyclerView
-                            android:id="@+id/rvMisEmprendimientos"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:visibility="gone" />
-
-                        <!-- Estado vacío -->
-                        <LinearLayout
-                            android:id="@+id/layoutEmprendimientosVacio"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical"
-                            android:gravity="center"
-                            android:padding="24dp"
-                            android:visibility="visible">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="📭"
-                                android:textSize="48sp"
-                                android:layout_marginBottom="12dp" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Aún no has publicado ningún emprendimiento"
-                                android:textSize="14sp"
-                                android:textColor="@color/text_secondary"
-                                android:gravity="center"
-                                android:layout_marginBottom="16dp" />
-
-                            <Button
-                                android:id="@+id/btnPublicarPrimero"
-                                android:layout_width="wrap_content"
-                                android:layout_height="40dp"
-                                android:text="Publicar Mi Primer Emprendimiento"
-                                android:backgroundTint="@color/success"
-                                android:textColor="@android:color/white"
-                                android:textSize="12sp" />
-
-                        </LinearLayout>
-
-                    </LinearLayout>
-
-                </LinearLayout>
-
-            </com.google.android.material.card.MaterialCardView>
-
-            <!-- Mis Cursos -->
-            <com.google.android.material.card.MaterialCardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:cardCornerRadius="12dp"
-                app:cardElevation="2dp"
-                android:layout_marginBottom="16dp">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-                    <!-- Header -->
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:padding="16dp"
-                        android:background="@color/info"
-                        android:gravity="center_vertical">
-
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text="📚 Mis Cursos"
-                            android:textSize="16sp"
-                            android:textStyle="bold"
-                            android:textColor="@android:color/white" />
-
-                    </LinearLayout>
-
-                    <!-- Content -->
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:padding="12dp">
-
-                        <!-- RecyclerView para cursos -->
-                        <androidx.recyclerview.widget.RecyclerView
-                            android:id="@+id/rvMisCursos"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:visibility="gone" />
-
-                        <!-- Estado vacío -->
-                        <LinearLayout
-                            android:id="@+id/layoutCursosVacio"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical"
-                            android:gravity="center"
-                            android:padding="24dp"
-                            android:visibility="visible">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="📖"
-                                android:textSize="48sp"
-                                android:layout_marginBottom="12dp" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="No estás inscrito en ningún curso"
-                                android:textSize="14sp"
-                                android:textColor="@color/text_secondary"
-                                android:gravity="center"
-                                android:layout_marginBottom="16dp" />
-
-                            <Button
-                                android:id="@+id/btnExplorarCursos"
-                                android:layout_width="wrap_content"
-                                android:layout_height="40dp"
-                                android:text="Explorar Cursos"
-                                android:backgroundTint="@color/success"
-                                android:textColor="@android:color/white"
-                                android:textSize="12sp" />
-
-                        </LinearLayout>
-
-                    </LinearLayout>
-
-                </LinearLayout>
-
-            </com.google.android.material.card.MaterialCardView>
-
-        </LinearLayout>
-
-        <!-- COLUMNA DERECHA -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <!-- Me Encanta -->
-            <com.google.android.material.card.MaterialCardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:cardCornerRadius="12dp"
-                app:cardElevation="2dp"
-                android:layout_marginBottom="16dp">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-                    <!-- Header -->
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:padding="16dp"
-                        android:background="@color/error"
-                        android:gravity="center_vertical">
-
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text="❤️ Me Encanta"
-                            android:textSize="16sp"
-                            android:textStyle="bold"
-                            android:textColor="@android:color/white" />
-
-                    </LinearLayout>
-
-                    <!-- Content -->
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:padding="12dp">
-
-                        <!-- RecyclerView para me encanta -->
-                        <androidx.recyclerview.widget.RecyclerView
-                            android:id="@+id/rvMeEncanta"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:visibility="gone" />
-
-                        <!-- Estado vacío -->
-                        <LinearLayout
-                            android:id="@+id/layoutMeEncantaVacio"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical"
-                            android:gravity="center"
-                            android:padding="24dp"
-                            android:visibility="visible">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="💔"
-                                android:textSize="48sp"
-                                android:layout_marginBottom="12dp" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Aún no has dado Me Encanta a ningún emprendimiento"
-                                android:textSize="14sp"
-                                android:textColor="@color/text_secondary"
-                                android:gravity="center"
-                                android:layout_marginBottom="16dp" />
-
-                            <Button
-                                android:id="@+id/btnExplorarEmprendimientos"
-                                android:layout_width="wrap_content"
-                                android:layout_height="40dp"
-                                android:text="Explorar Emprendimientos"
-                                android:backgroundTint="@color/success"
-                                android:textColor="@android:color/white"
-                                android:textSize="12sp" />
-
-                        </LinearLayout>
-
-                    </LinearLayout>
-
-                </LinearLayout>
-
-            </com.google.android.material.card.MaterialCardView>
-
-            <!-- Mis Eventos -->
-            <com.google.android.material.card.MaterialCardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:cardCornerRadius="12dp"
-                app:cardElevation="2dp"
-                android:layout_marginBottom="16dp">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-                    <!-- Header -->
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:padding="16dp"
-                        android:background="@color/warning"
-                        android:gravity="center_vertical">
-
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text="📅 Mis Eventos"
-                            android:textSize="16sp"
-                            android:textStyle="bold"
-                            android:textColor="@color/text_primary" />
-
-                    </LinearLayout>
-
-                    <!-- Content -->
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:padding="12dp">
-
-                        <!-- RecyclerView para eventos -->
-                        <androidx.recyclerview.widget.RecyclerView
-                            android:id="@+id/rvMisEventos"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:visibility="gone" />
-
-                        <!-- Estado vacío -->
-                        <LinearLayout
-                            android:id="@+id/layoutEventosVacio"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical"
-                            android:gravity="center"
-                            android:padding="24dp"
-                            android:visibility="visible">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="🗓️"
-                                android:textSize="48sp"
-                                android:layout_marginBottom="12dp" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="No estás registrado en ningún evento"
-                                android:textSize="14sp"
-                                android:textColor="@color/text_secondary"
-                                android:gravity="center"
-                                android:layout_marginBottom="16dp" />
-
-                            <Button
-                                android:id="@+id/btnExplorarEventos"
-                                android:layout_width="wrap_content"
-                                android:layout_height="40dp"
-                                android:text="Explorar Eventos"
-                                android:backgroundTint="@color/success"
-                                android:textColor="@android:color/white"
-                                android:textSize="12sp" />
-
-                        </LinearLayout>
-
-                    </LinearLayout>
-
-                </LinearLayout>
-
-            </com.google.android.material.card.MaterialCardView>
-
-            <!-- Mis Testimonios -->
-            <com.google.android.material.card.MaterialCardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:cardCornerRadius="12dp"
-                app:cardElevation="2dp"
-                android:layout_marginBottom="16dp">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-                    <!-- Header -->
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:padding="16dp"
+                        android:padding="12dp"
                         android:background="@color/success"
                         android:gravity="center_vertical">
 
@@ -413,75 +226,98 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="💬 Mis Testimonios"
-                            android:textSize="16sp"
+                            android:text="🏪 Mis Emprendimientos"
+                            android:textSize="14sp"
                             android:textStyle="bold"
                             android:textColor="@android:color/white" />
 
-                        <Button
-                            android:id="@+id/btnCompartirTestimonio"
+                        <TextView
+                            android:id="@+id/tvCantidadEmprendimientos"
                             android:layout_width="wrap_content"
-                            android:layout_height="32dp"
-                            android:text="+ Nuevo"
-                            android:backgroundTint="@android:color/white"
-                            android:textColor="@color/success"
-                            android:textSize="11sp"
-                            android:visibility="gone" />
+                            android:layout_height="wrap_content"
+                            android:text="0"
+                            android:textSize="12sp"
+                            android:textColor="@android:color/white" />
 
                     </LinearLayout>
 
-                    <!-- Content -->
+                    <!-- RecyclerView para mis emprendimientos -->
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rvMisEmprendimientos"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="8dp"
+                        android:clipToPadding="false" />
+
+                    <!-- Estado vacío -->
                     <LinearLayout
+                        android:id="@+id/layoutVacio"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
-                        android:padding="12dp">
+                        android:gravity="center"
+                        android:padding="24dp"
+                        android:visibility="gone">
 
-                        <!-- RecyclerView para testimonios -->
-                        <androidx.recyclerview.widget.RecyclerView
-                            android:id="@+id/rvMisTestimonios"
-                            android:layout_width="match_parent"
+                        <TextView
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:visibility="gone" />
+                            android:text="📭"
+                            android:textSize="48sp"
+                            android:layout_marginBottom="8dp" />
 
-                        <!-- Estado vacío -->
-                        <LinearLayout
-                            android:id="@+id/layoutTestimoniosVacio"
-                            android:layout_width="match_parent"
+                        <TextView
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:orientation="vertical"
-                            android:gravity="center"
-                            android:padding="24dp"
-                            android:visibility="visible">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="💭"
-                                android:textSize="48sp"
-                                android:layout_marginBottom="12dp" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Aún no has publicado ningún testimonio"
-                                android:textSize="14sp"
-                                android:textColor="@color/text_secondary"
-                                android:gravity="center"
-                                android:layout_marginBottom="16dp" />
-
-                            <Button
-                                android:id="@+id/btnCompartirTestimonioVacio"
-                                android:layout_width="wrap_content"
-                                android:layout_height="40dp"
-                                android:text="Compartir Testimonio"
-                                android:backgroundTint="@color/success"
-                                android:textColor="@android:color/white"
-                                android:textSize="12sp" />
-
-                        </LinearLayout>
+                            android:text="Aún no tienes emprendimientos"
+                            android:textSize="14sp"
+                            android:textColor="@color/text_secondary"
+                            android:gravity="center" />
 
                     </LinearLayout>
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Botones de acción -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="2dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <Button
+                        android:id="@+id/btnEditarPerfil"
+                        android:layout_width="match_parent"
+                        android:layout_height="44dp"
+                        android:text="✏ Editar Perfil"
+                        android:backgroundTint="@color/primary"
+                        android:textColor="@android:color/white"
+                        android:layout_marginBottom="12dp" />
+
+                    <Button
+                        android:id="@+id/btnCambiarPassword"
+                        android:layout_width="match_parent"
+                        android:layout_height="44dp"
+                        android:text="🔒 Cambiar Contraseña"
+                        android:backgroundTint="@color/gray_light"
+                        android:textColor="@color/text_primary"
+                        android:layout_marginBottom="12dp" />
+
+                    <Button
+                        android:id="@+id/btnNuevoEmprendimiento"
+                        android:layout_width="match_parent"
+                        android:layout_height="44dp"
+                        android:text="➕ Nuevo Emprendimiento"
+                        android:backgroundTint="@color/success"
+                        android:textColor="@android:color/white" />
 
                 </LinearLayout>
 

@@ -75,7 +75,7 @@ class MainActivity : AppCompatActivity() {
                     // TODO: Ir a panel de administrador
                 }
                 R.id.nav_mi_perfil -> {
-                    cargarFragment(HomeFragment())
+                    startActivity(Intent(this, MiPerfilActivity::class.java))
                 }
                 R.id.nav_dashboard -> {
                     cargarFragment(HomeFragment())
