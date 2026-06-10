@@ -53,6 +53,12 @@
             android:parentActivityName=".MainActivity"
             android:exported="false" />
 
+        <!-- mi perfil-->
+        <activity
+            android:name=".MiPerfilActivity"
+            android:parentActivityName=".MainActivity"
+            android:exported="false" />
+
     </application>
 
 </manifest>
