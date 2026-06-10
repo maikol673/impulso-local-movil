@@ -65,6 +65,12 @@
             android:parentActivityName=".MainActivity"
             android:exported="false" />
 
+        <!--mis favoritos-->
+        <activity
+            android:name=".MisFavoritosActivity"
+            android:parentActivityName=".MainActivity"
+            android:exported="false" />
+
     </application>
 
 </manifest>
