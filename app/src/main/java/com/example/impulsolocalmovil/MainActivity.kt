@@ -47,13 +47,13 @@ class MainActivity : AppCompatActivity() {
 
         val menu = navigationView.menu
 
-        // Mostrar/Ocultar según estado de login
         val isLoggedIn = (userEmail != null)
 
         menu.findItem(R.id.nav_login)?.isVisible = !isLoggedIn
         menu.findItem(R.id.nav_logout)?.isVisible = isLoggedIn
         menu.findItem(R.id.nav_admin)?.isVisible = (isLoggedIn && isAdmin)
         menu.findItem(R.id.nav_mi_perfil)?.isVisible = isLoggedIn
+        menu.findItem(R.id.nav_mis_emprendimientos)?.isVisible = isLoggedIn
         menu.findItem(R.id.nav_dashboard)?.isVisible = isLoggedIn
         menu.findItem(R.id.nav_mis_ordenes)?.isVisible = isLoggedIn
         menu.findItem(R.id.nav_chat)?.isVisible = isLoggedIn
@@ -77,6 +77,9 @@ class MainActivity : AppCompatActivity() {
                 R.id.nav_mi_perfil -> {
                     startActivity(Intent(this, MiPerfilActivity::class.java))
                 }
+                R.id.nav_mis_emprendimientos -> {
+                    startActivity(Intent(this, MisEmprendimientosActivity::class.java))
+                }
                 R.id.nav_dashboard -> {
                     cargarFragment(HomeFragment())
                 }
@@ -88,7 +91,6 @@ class MainActivity : AppCompatActivity() {
             true
         }
         navigationView.itemIconTintList = null
-
 
         onBackPressedDispatcher.addCallback(this) {
             if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
