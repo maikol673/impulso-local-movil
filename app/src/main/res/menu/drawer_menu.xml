@@ -31,6 +31,11 @@
         android:title="Mis Cursos"
         android:visible="false" />
 
+    <item
+        android:id="@+id/nav_mis_eventos"
+        android:title="Mis Eventos"
+        android:visible="false" />
+
     <item android:id="@+id/nav_dashboard"
         android:title="Dashboard"
         android:visible="false" />
