@@ -77,6 +77,12 @@
             android:parentActivityName=".MainActivity"
             android:exported="false" />
 
+        <!-- mis eventos-->
+        <activity
+            android:name=".MisEventosActivity"
+            android:parentActivityName=".MainActivity"
+            android:exported="false" />
+
     </application>
 
 </manifest>
