@@ -89,6 +89,12 @@
             android:parentActivityName=".MainActivity"
             android:exported="false" />
 
+        <!--ajustes -->
+        <activity
+            android:name=".AjustesActivity"
+            android:parentActivityName=".MainActivity"
+            android:exported="false" />
+
     </application>
 
 </manifest>

@@ -96,6 +96,10 @@ class MainActivity : AppCompatActivity() {
                     startActivity(Intent(this, MisEventosActivity::class.java))
                 }
 
+                R.id.nav_ajustes -> {
+                    startActivity(Intent(this, AjustesActivity::class.java))
+                }
+
 //                R.id.nav_dashboard -> {
 //                    cargarFragment(HomeFragment())
 //                }
