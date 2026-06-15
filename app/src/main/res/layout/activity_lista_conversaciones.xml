@@ -6,62 +6,39 @@
     android:orientation="vertical"
     android:background="#f8f9fa">
 
-    <!-- Header -->
-    <com.google.android.material.card.MaterialCardView
+    <!-- Toolbar -->
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:cardCornerRadius="0dp"
-        android:layout_marginBottom="16dp">
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/primary"
+        app:titleTextColor="@android:color/white"
+        app:navigationIcon="@drawable/ic_back"
+        app:navigationIconTint="@android:color/white" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:padding="20dp"
-            android:background="@color/primary"
-            android:gravity="center_vertical">
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="💬 Mensajes"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                android:textColor="@android:color/white" />
-
-            <Button
-                android:id="@+id/btnNuevoChat"
-                android:layout_width="wrap_content"
-                android:layout_height="36dp"
-                android:text="+ Nuevo Chat"
-                android:backgroundTint="@android:color/white"
-                android:textColor="@color/primary"
-                android:textSize="12sp" />
-
-        </LinearLayout>
-
-    </com.google.android.material.card.MaterialCardView>
-
-    <!-- Lista de conversaciones -->
-    <com.google.android.material.card.MaterialCardView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        app:cardCornerRadius="12dp"
-        app:cardElevation="2dp"
-        android:layout_margin="12dp">
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:baselineAligned="false">
 
+        <!-- COLUMNA IZQUIERDA: Lista de conversaciones (40%) -->
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:layout_weight="4"
+            android:orientation="vertical"
+            android:background="@android:color/white"
+            android:elevation="4dp">
 
+            <!-- Header conversaciones -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="16dp"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:padding="12dp"
+                android:background="@color/primary"
+                android:gravity="center_vertical">
 
                 <TextView
                     android:layout_width="0dp"
@@ -70,7 +47,7 @@
                     android:text="Conversaciones"
                     android:textSize="14sp"
                     android:textStyle="bold"
-                    android:textColor="@color/text_primary" />
+                    android:textColor="@android:color/white" />
 
                 <TextView
                     android:id="@+id/tvTotalConversaciones"
@@ -87,28 +64,105 @@
 
             </LinearLayout>
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/gray_light" />
-
             <!-- RecyclerView para conversaciones -->
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvConversaciones"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
                 android:padding="8dp"
                 android:clipToPadding="false" />
 
-            <!-- Estado vacío -->
+            <!-- Estado vacío conversaciones -->
             <LinearLayout
-                android:id="@+id/layoutVacio"
+                android:id="@+id/layoutVacioConversaciones"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
                 android:gravity="center"
-                android:padding="32dp"
+                android:padding="24dp"
                 android:visibility="gone">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="💬"
+                    android:textSize="48sp"
+                    android:layout_marginBottom="12dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="No tienes conversaciones"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/text_primary" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Inicia un nuevo chat para comenzar"
+                    android:textSize="11sp"
+                    android:textColor="@color/text_secondary"
+                    android:gravity="center" />
+
+            </LinearLayout>
+
+            <!-- Usuarios Disponibles -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="8dp"
+                android:background="@android:color/white"
+                android:elevation="2dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="12dp"
+                    android:background="@color/info"
+                    android:gravity="center_vertical">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Usuarios Disponibles"
+                        android:textSize="12sp"
+                        android:textStyle="bold"
+                        android:textColor="@android:color/white" />
+
+                </LinearLayout>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvUsuariosDisponibles"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:padding="8dp"
+                    android:clipToPadding="false" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <!-- COLUMNA DERECHA: Área de chat (60%) -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="6"
+            android:orientation="vertical"
+            android:background="@android:color/white">
+
+            <!-- Si no hay conversación seleccionada -->
+            <LinearLayout
+                android:id="@+id/layoutNoSeleccionado"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:padding="24dp"
+                android:visibility="visible">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -120,7 +174,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="No tienes conversaciones"
+                    android:text="Selecciona una conversación"
                     android:textSize="18sp"
                     android:textStyle="bold"
                     android:textColor="@color/text_primary"
@@ -129,31 +183,142 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Inicia un nuevo chat para comenzar"
-                    android:textSize="14sp"
+                    android:text="O inicia un nuevo chat con otro usuario"
+                    android:textSize="13sp"
                     android:textColor="@color/text_secondary"
-                    android:layout_marginBottom="24dp" />
+                    android:gravity="center"
+                    android:layout_marginBottom="16dp" />
 
                 <Button
-                    android:id="@+id/btnNuevoChatVacio"
+                    android:id="@+id/btnNuevoChatDesdeVacio"
                     android:layout_width="wrap_content"
-                    android:layout_height="44dp"
+                    android:layout_height="40dp"
                     android:text="+ Nuevo Chat"
                     android:backgroundTint="@color/primary"
-                    android:textColor="@android:color/white" />
+                    android:textColor="@android:color/white"
+                    android:textSize="12sp" />
+
+            </LinearLayout>
+
+            <!-- Chat activo (oculto inicialmente) -->
+            <LinearLayout
+                android:id="@+id/layoutChatActivo"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <!-- Header del chat -->
+                <LinearLayout
+                    android:id="@+id/headerChat"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="12dp"
+                    android:background="@color/primary"
+                    android:gravity="center_vertical">
+
+                    <FrameLayout
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:background="@drawable/bg_circle_white"
+                        android:layout_marginEnd="12dp">
+
+                        <TextView
+                            android:id="@+id/tvAvatarChat"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="U"
+                            android:textSize="18sp"
+                            android:textColor="@color/primary"
+                            android:textStyle="bold"
+                            android:layout_gravity="center" />
+
+                    </FrameLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/tvNombreChat"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Usuario"
+                            android:textSize="14sp"
+                            android:textStyle="bold"
+                            android:textColor="@android:color/white" />
+
+                        <TextView
+                            android:id="@+id/tvUsernameChat"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@usuario"
+                            android:textSize="11sp"
+                            android:textColor="@android:color/white"
+                            android:alpha="0.8" />
+
+                    </LinearLayout>
+
+                    <Button
+                        android:id="@+id/btnEliminarChat"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:text="🗑️"
+                        android:backgroundTint="@android:color/transparent"
+                        android:textColor="@android:color/white"
+                        android:textSize="16sp" />
+
+                </LinearLayout>
+
+                <!-- Área de mensajes -->
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvMensajes"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:padding="12dp"
+                    android:clipToPadding="false" />
+
+                <!-- Input para enviar mensaje -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="12dp"
+                    android:background="@android:color/white"
+                    android:elevation="4dp"
+                    android:gravity="center_vertical">
+
+                    <EditText
+                        android:id="@+id/etMensaje"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:hint="Escribe tu mensaje aquí..."
+                        android:minHeight="44dp"
+                        android:maxHeight="100dp"
+                        android:padding="12dp"
+                        android:background="@drawable/bg_editartexto"
+                        android:inputType="textMultiLine" />
+
+                    <Button
+                        android:id="@+id/btnEnviar"
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:text="📤"
+                        android:backgroundTint="@color/primary"
+                        android:layout_marginStart="8dp"
+                        android:padding="0dp" />
+
+                </LinearLayout>
 
             </LinearLayout>
 
         </LinearLayout>
 
-    </com.google.android.material.card.MaterialCardView>
-
-    <!-- Modal para nuevo chat (dialog) -->
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/modalOverlay"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#80000000"
-        android:visibility="gone" />
+    </LinearLayout>
 
 </LinearLayout>
