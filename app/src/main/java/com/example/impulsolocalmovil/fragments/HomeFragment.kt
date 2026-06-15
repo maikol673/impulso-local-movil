@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import com.example.impulsolocalmovil.CrearTestimonioActivity
 import com.example.impulsolocalmovil.ListadoEmprendimientosActivity
 import com.example.impulsolocalmovil.PublicarEmprendimientoActivity
 import com.example.impulsolocalmovil.R
@@ -47,7 +48,8 @@ class HomeFragment : Fragment() {
         }
 
         btnAgregarTestimonio.setOnClickListener {
-            // TODO: Navegar a Crear Testimonio
+            val intent = Intent(requireContext(), CrearTestimonioActivity::class.java)
+            startActivity(intent)
         }
     }
 }
