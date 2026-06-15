@@ -95,6 +95,18 @@
             android:parentActivityName=".MainActivity"
             android:exported="false" />
 
+        <!--chat-->
+        <activity
+            android:name=".ChatActivity"
+            android:parentActivityName=".MainActivity"
+            android:exported="false" />
+
+        <!-- ChatConversacionActivity -->
+        <activity
+            android:name=".ChatConversacionActivity"
+            android:parentActivityName=".ChatActivity"
+            android:exported="false" />
+
     </application>
 
 </manifest>

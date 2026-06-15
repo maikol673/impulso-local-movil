@@ -100,6 +100,10 @@ class MainActivity : AppCompatActivity() {
                     startActivity(Intent(this, AjustesActivity::class.java))
                 }
 
+                R.id.nav_chat -> {
+                    startActivity(Intent(this, ChatActivity::class.java))
+                }
+
 //                R.id.nav_dashboard -> {
 //                    cargarFragment(HomeFragment())
 //                }
