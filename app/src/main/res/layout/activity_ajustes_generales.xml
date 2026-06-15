@@ -9,129 +9,47 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="16dp">
+        android:orientation="vertical">
 
-        <!-- Menú lateral (horizontal scroll para móvil) -->
-        <HorizontalScrollView
+        <!-- Toolbar -->
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/primary"
+            app:titleTextColor="@android:color/white"
+            app:navigationIcon="@drawable/ic_back"
+            app:navigationIconTint="@android:color/white" />
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:scrollbars="none"
-            android:layout_marginBottom="16dp">
+            android:orientation="vertical"
+            android:padding="16dp">
 
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/menuGenerales"
-                    android:layout_width="wrap_content"
-                    android:layout_height="40dp"
-                    android:text="🔧 Generales"
-                    android:paddingStart="20dp"
-                    android:paddingEnd="20dp"
-                    android:gravity="center"
-                    android:background="@drawable/bg_chip_selected"
-                    android:textColor="@android:color/white"
-                    android:textSize="13sp"
-                    android:layout_marginEnd="8dp" />
-
-                <TextView
-                    android:id="@+id/menuNotificaciones"
-                    android:layout_width="wrap_content"
-                    android:layout_height="40dp"
-                    android:text="🔔 Notificaciones"
-                    android:paddingStart="20dp"
-                    android:paddingEnd="20dp"
-                    android:gravity="center"
-                    android:background="@drawable/bg_chip"
-                    android:textColor="@color/text_secondary"
-                    android:textSize="13sp"
-                    android:layout_marginEnd="8dp" />
-
-                <TextView
-                    android:id="@+id/menuPerfil"
-                    android:layout_width="wrap_content"
-                    android:layout_height="40dp"
-                    android:text="👤 Perfil"
-                    android:paddingStart="20dp"
-                    android:paddingEnd="20dp"
-                    android:gravity="center"
-                    android:background="@drawable/bg_chip"
-                    android:textColor="@color/text_secondary"
-                    android:textSize="13sp"
-                    android:layout_marginEnd="8dp" />
-
-                <TextView
-                    android:id="@+id/menuSeguridad"
-                    android:layout_width="wrap_content"
-                    android:layout_height="40dp"
-                    android:text="🔒 Seguridad"
-                    android:paddingStart="20dp"
-                    android:paddingEnd="20dp"
-                    android:gravity="center"
-                    android:background="@drawable/bg_chip"
-                    android:textColor="@color/text_secondary"
-                    android:textSize="13sp"
-                    android:layout_marginEnd="8dp" />
-
-                <TextView
-                    android:id="@+id/menuMisEmprendimientos"
-                    android:layout_width="wrap_content"
-                    android:layout_height="40dp"
-                    android:text="🏪 Mis Emprendimientos"
-                    android:paddingStart="20dp"
-                    android:paddingEnd="20dp"
-                    android:gravity="center"
-                    android:background="@drawable/bg_chip"
-                    android:textColor="@color/text_secondary"
-                    android:textSize="13sp" />
-
-            </LinearLayout>
-
-        </HorizontalScrollView>
-
-        <!-- Contenido principal - Generales -->
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/cardGenerales"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:cardCornerRadius="12dp"
-            app:cardElevation="2dp">
-
-            <LinearLayout
+            <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                app:cardCornerRadius="12dp"
+                app:cardElevation="2dp">
 
-                <!-- Header -->
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="16dp"
-                    android:background="@color/primary"
-                    android:gravity="center_vertical">
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="🔧 Configuración General"
-                        android:textSize="18sp"
-                        android:textStyle="bold"
-                        android:textColor="@android:color/white" />
-
-                </LinearLayout>
-
-                <!-- Formulario -->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     android:padding="20dp">
 
-                    <!-- Sección 1: Notificaciones -->
+                    <!-- Título -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="⚙️ Configuración General"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/text_primary"
+                        android:layout_marginBottom="20dp" />
+
+                    <!-- Notificaciones -->
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -146,7 +64,7 @@
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
                         android:gravity="center_vertical"
-                        android:layout_marginBottom="16dp">
+                        android:layout_marginBottom="8dp">
 
                         <TextView
                             android:layout_width="0dp"
@@ -157,7 +75,7 @@
                             android:textColor="@color/text_primary" />
 
                         <androidx.appcompat.widget.SwitchCompat
-                            android:id="@+id/switchNotificacionesGlobal"
+                            android:id="@+id/switchNotificaciones"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content" />
 
@@ -187,7 +105,7 @@
                             android:textColor="@color/text_primary" />
 
                         <androidx.appcompat.widget.SwitchCompat
-                            android:id="@+id/switchNotificacionesEmailGeneral"
+                            android:id="@+id/switchNotificacionesEmail"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content" />
 
@@ -201,40 +119,7 @@
                         android:textColor="@color/text_secondary"
                         android:layout_marginBottom="24dp" />
 
-                    <!-- Sección 2: Apariencia -->
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="🎨 Apariencia"
-                        android:textSize="16sp"
-                        android:textStyle="bold"
-                        android:textColor="@color/text_primary"
-                        android:layout_marginBottom="12dp" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Tema de la plataforma"
-                        android:textSize="14sp"
-                        android:textColor="@color/text_primary"
-                        android:layout_marginBottom="8dp" />
-
-                    <Spinner
-                        android:id="@+id/spinnerTema"
-                        android:layout_width="match_parent"
-                        android:layout_height="48dp"
-                        android:background="@drawable/bg_editartexto"
-                        android:layout_marginBottom="16dp" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Personaliza cómo se ve la plataforma"
-                        android:textSize="11sp"
-                        android:textColor="@color/text_secondary"
-                        android:layout_marginBottom="24dp" />
-
-                    <!-- Sección 3: Privacidad -->
+                    <!-- Privacidad -->
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -304,11 +189,11 @@
                         android:textColor="@color/text_secondary"
                         android:layout_marginBottom="24dp" />
 
-                    <!-- Sección 4: Idioma y Región -->
+                    <!-- Apariencia -->
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="🌍 Idioma y Región"
+                        android:text="🎨 Apariencia"
                         android:textSize="16sp"
                         android:textStyle="bold"
                         android:textColor="@color/text_primary"
@@ -317,28 +202,38 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Idioma"
+                        android:text="Tema de la plataforma"
+                        android:textSize="14sp"
+                        android:textColor="@color/text_primary"
+                        android:layout_marginBottom="8dp" />
+
+                    <Spinner
+                        android:id="@+id/spinnerTema"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:background="@drawable/bg_editartexto"
+                        android:layout_marginBottom="16dp" />
+
+                    <!-- Idioma -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="🌍 Idioma"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/text_primary"
+                        android:layout_marginBottom="12dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Idioma de la aplicación"
                         android:textSize="14sp"
                         android:textColor="@color/text_primary"
                         android:layout_marginBottom="8dp" />
 
                     <Spinner
                         android:id="@+id/spinnerIdioma"
-                        android:layout_width="match_parent"
-                        android:layout_height="48dp"
-                        android:background="@drawable/bg_editartexto"
-                        android:layout_marginBottom="16dp" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Zona horaria"
-                        android:textSize="14sp"
-                        android:textColor="@color/text_primary"
-                        android:layout_marginBottom="8dp" />
-
-                    <Spinner
-                        android:id="@+id/spinnerZonaHoraria"
                         android:layout_width="match_parent"
                         android:layout_height="48dp"
                         android:background="@drawable/bg_editartexto"
@@ -349,8 +244,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
-                        android:gravity="center"
-                        android:layout_marginTop="16dp">
+                        android:gravity="center">
 
                         <Button
                             android:id="@+id/btnRestablecer"
@@ -367,7 +261,7 @@
                             android:layout_width="0dp"
                             android:layout_height="44dp"
                             android:layout_weight="1"
-                            android:text="💾 Guardar Cambios"
+                            android:text="💾 Guardar"
                             android:backgroundTint="@color/primary"
                             android:textColor="@android:color/white"
                             android:layout_marginStart="8dp" />
@@ -376,466 +270,9 @@
 
                 </LinearLayout>
 
-            </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
 
-        </com.google.android.material.card.MaterialCardView>
-
-        <!-- Contenido - Notificaciones (oculto inicialmente) -->
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/cardNotificaciones"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:cardCornerRadius="12dp"
-            app:cardElevation="2dp"
-            android:visibility="gone">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <!-- Header -->
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="16dp"
-                    android:background="@color/primary"
-                    android:gravity="center_vertical">
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="🔔 Gestión de Notificaciones"
-                        android:textSize="18sp"
-                        android:textStyle="bold"
-                        android:textColor="@android:color/white" />
-
-                </LinearLayout>
-
-                <!-- Formulario -->
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:padding="20dp">
-
-                    <!-- Estado General -->
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="📱 Estado de Notificaciones"
-                        android:textSize="16sp"
-                        android:textStyle="bold"
-                        android:textColor="@color/text_primary"
-                        android:layout_marginBottom="12dp" />
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:gravity="center_vertical"
-                        android:layout_marginBottom="8dp">
-
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text="Activar notificaciones"
-                            android:textSize="14sp"
-                            android:textStyle="bold"
-                            android:textColor="@color/text_primary" />
-
-                        <androidx.appcompat.widget.SwitchCompat
-                            android:id="@+id/switchActivarNotificaciones"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content" />
-
-                    </LinearLayout>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Activa o desactiva todas las notificaciones del sistema"
-                        android:textSize="11sp"
-                        android:textColor="@color/text_secondary"
-                        android:layout_marginBottom="16dp" />
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:gravity="center_vertical"
-                        android:layout_marginBottom="8dp">
-
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text="Notificaciones por correo electrónico"
-                            android:textSize="14sp"
-                            android:textStyle="bold"
-                            android:textColor="@color/text_primary" />
-
-                        <androidx.appcompat.widget.SwitchCompat
-                            android:id="@+id/switchNotificacionesEmail"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content" />
-
-                    </LinearLayout>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Recibir notificaciones en tu email"
-                        android:textSize="11sp"
-                        android:textColor="@color/text_secondary"
-                        android:layout_marginBottom="24dp" />
-
-                    <!-- Tipos de Notificaciones -->
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="📬 Tipos de Notificaciones"
-                        android:textSize="16sp"
-                        android:textStyle="bold"
-                        android:textColor="@color/text_primary"
-                        android:layout_marginBottom="12dp" />
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:gravity="center_vertical"
-                        android:layout_marginBottom="8dp">
-
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text="👥 Nuevos seguidores"
-                            android:textSize="14sp"
-                            android:textColor="@color/text_primary" />
-
-                        <androidx.appcompat.widget.SwitchCompat
-                            android:id="@+id/switchNuevosSeguidores"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content" />
-
-                    </LinearLayout>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Cuando alguien sigue tus emprendimientos"
-                        android:textSize="11sp"
-                        android:textColor="@color/text_secondary"
-                        android:layout_marginBottom="12dp" />
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:gravity="center_vertical"
-                        android:layout_marginBottom="8dp">
-
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text="❤️ Nuevos Me gusta"
-                            android:textSize="14sp"
-                            android:textColor="@color/text_primary" />
-
-                        <androidx.appcompat.widget.SwitchCompat
-                            android:id="@+id/switchNuevosMeGusta"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content" />
-
-                    </LinearLayout>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Cuando a alguien le gusta tu emprendimiento"
-                        android:textSize="11sp"
-                        android:textColor="@color/text_secondary"
-                        android:layout_marginBottom="12dp" />
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:gravity="center_vertical"
-                        android:layout_marginBottom="8dp">
-
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text="💬 Nuevos comentarios"
-                            android:textSize="14sp"
-                            android:textColor="@color/text_primary" />
-
-                        <androidx.appcompat.widget.SwitchCompat
-                            android:id="@+id/switchNuevosComentarios"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content" />
-
-                    </LinearLayout>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Cuando alguien comenta en tus productos"
-                        android:textSize="11sp"
-                        android:textColor="@color/text_secondary"
-                        android:layout_marginBottom="12dp" />
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:gravity="center_vertical"
-                        android:layout_marginBottom="8dp">
-
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text="📦 Nuevas órdenes"
-                            android:textSize="14sp"
-                            android:textColor="@color/text_primary" />
-
-                        <androidx.appcompat.widget.SwitchCompat
-                            android:id="@+id/switchNuevasOrdenes"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content" />
-
-                    </LinearLayout>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Cuando alguien compra tus productos"
-                        android:textSize="11sp"
-                        android:textColor="@color/text_secondary"
-                        android:layout_marginBottom="12dp" />
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:gravity="center_vertical"
-                        android:layout_marginBottom="8dp">
-
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text="🎉 Promociones y ofertas"
-                            android:textSize="14sp"
-                            android:textColor="@color/text_primary" />
-
-                        <androidx.appcompat.widget.SwitchCompat
-                            android:id="@+id/switchPromociones"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content" />
-
-                    </LinearLayout>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Ofertas especiales y novedades de la plataforma"
-                        android:textSize="11sp"
-                        android:textColor="@color/text_secondary"
-                        android:layout_marginBottom="24dp" />
-
-                    <!-- Frecuencia -->
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="⏰ Frecuencia"
-                        android:textSize="16sp"
-                        android:textStyle="bold"
-                        android:textColor="@color/text_primary"
-                        android:layout_marginBottom="12dp" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Frecuencia de notificaciones por email"
-                        android:textSize="14sp"
-                        android:textColor="@color/text_primary"
-                        android:layout_marginBottom="8dp" />
-
-                    <Spinner
-                        android:id="@+id/spinnerFrecuenciaEmail"
-                        android:layout_width="match_parent"
-                        android:layout_height="48dp"
-                        android:background="@drawable/bg_editartexto"
-                        android:layout_marginBottom="16dp" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Controla con qué frecuencia recibes notificaciones por email"
-                        android:textSize="11sp"
-                        android:textColor="@color/text_secondary"
-                        android:layout_marginBottom="24dp" />
-
-                    <!-- Tipo de Alerta -->
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="🔊 Tipo de Alerta"
-                        android:textSize="16sp"
-                        android:textStyle="bold"
-                        android:textColor="@color/text_primary"
-                        android:layout_marginBottom="12dp" />
-
-                    <RadioGroup
-                        android:id="@+id/radioGroupAlerta"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="24dp">
-
-                        <RadioButton
-                            android:id="@+id/radioSilenciosa"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="🔇 Silenciosa"
-                            android:layout_marginBottom="12dp" />
-
-                        <RadioButton
-                            android:id="@+id/radioSonido"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="🔊 Con sonido"
-                            android:layout_marginBottom="12dp" />
-
-                        <RadioButton
-                            android:id="@+id/radioVibracion"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="📳 Con vibración" />
-
-                    </RadioGroup>
-
-                    <!-- Botones -->
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:gravity="center"
-                        android:layout_marginTop="16dp">
-
-                        <Button
-                            android:id="@+id/btnRestablecerNotificaciones"
-                            android:layout_width="0dp"
-                            android:layout_height="44dp"
-                            android:layout_weight="1"
-                            android:text="Restablecer"
-                            android:backgroundTint="@color/gray_light"
-                            android:textColor="@color/text_primary"
-                            android:layout_marginEnd="8dp" />
-
-                        <Button
-                            android:id="@+id/btnGuardarNotificaciones"
-                            android:layout_width="0dp"
-                            android:layout_height="44dp"
-                            android:layout_weight="1"
-                            android:text="💾 Guardar Preferencias"
-                            android:backgroundTint="@color/primary"
-                            android:textColor="@android:color/white"
-                            android:layout_marginStart="8dp" />
-
-                    </LinearLayout>
-
-                </LinearLayout>
-
-            </LinearLayout>
-
-        </com.google.android.material.card.MaterialCardView>
-
-        <!-- Información de la cuenta -->
-        <com.google.android.material.card.MaterialCardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:cardCornerRadius="12dp"
-            app:cardElevation="2dp"
-            android:layout_marginTop="16dp">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="12dp"
-                    android:background="@color/info"
-                    android:gravity="center_vertical">
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="📋 Información de tu cuenta"
-                        android:textSize="14sp"
-                        android:textStyle="bold"
-                        android:textColor="@android:color/white" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:padding="16dp">
-
-                    <TextView
-                        android:id="@+id/tvUsuario"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Usuario: @usuario"
-                        android:textSize="13sp"
-                        android:textColor="@color/text_secondary"
-                        android:layout_marginBottom="8dp" />
-
-                    <TextView
-                        android:id="@+id/tvMiembroDesde"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Miembro desde: 01/06/2025"
-                        android:textSize="13sp"
-                        android:textColor="@color/text_secondary"
-                        android:layout_marginBottom="8dp" />
-
-                    <TextView
-                        android:id="@+id/tvEmailCuenta"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Email: test@test.com"
-                        android:textSize="13sp"
-                        android:textColor="@color/text_secondary"
-                        android:layout_marginBottom="8dp" />
-
-                    <TextView
-                        android:id="@+id/tvUltimoAcceso"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Último acceso: 01/06/2025 15:30"
-                        android:textSize="13sp"
-                        android:textColor="@color/text_secondary" />
-
-                </LinearLayout>
-
-            </LinearLayout>
-
-        </com.google.android.material.card.MaterialCardView>
+        </LinearLayout>
 
     </LinearLayout>
 

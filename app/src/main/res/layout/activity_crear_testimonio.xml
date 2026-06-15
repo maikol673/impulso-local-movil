@@ -126,7 +126,7 @@
                             android:layout_width="0dp"
                             android:layout_height="48dp"
                             android:layout_weight="1"
-                            android:text="✅ Publicar Testimonio"
+                            android:text="Publicar"
                             android:backgroundTint="@color/success"
                             android:textColor="@android:color/white"
                             android:textStyle="bold"
@@ -137,7 +137,7 @@
                             android:layout_width="0dp"
                             android:layout_height="48dp"
                             android:layout_weight="1"
-                            android:text="↩ Volver"
+                            android:text="Volver"
                             android:backgroundTint="@color/gray_light"
                             android:textColor="@color/text_primary"
                             android:layout_marginStart="8dp" />
