@@ -114,16 +114,16 @@
             android:exported="false" />
 
         <!-- CheckoutActivity -->
-<!--        <activity-->
-<!--            android:name=".CheckoutActivity"-->
-<!--            android:parentActivityName=".MiCarritoActivity"-->
-<!--            android:exported="false" />-->
+        <activity
+            android:name=".CheckoutActivity"
+            android:parentActivityName=".MiCarritoActivity"
+            android:exported="false" />
 
-        <!-- DetalleOrdenActivity -->
-<!--        <activity-->
-<!--            android:name=".DetalleOrdenActivity"-->
-<!--            android:parentActivityName=".MisOrdenesActivity"-->
-<!--            android:exported="false" />-->
+
+        <activity
+            android:name=".MisOrdenesActivity"
+            android:parentActivityName=".MainActivity"
+            android:exported="false" />
 
         <!-- AgregarProductoActivity -->
 <!--        <activity-->
