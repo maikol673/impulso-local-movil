@@ -85,7 +85,7 @@ class MiPerfilActivity : AppCompatActivity() {
 
     private fun setupClickListeners() {
         btnEditarPerfil.setOnClickListener {
-            Toast.makeText(this, "Editar Perfil - Próximamente", Toast.LENGTH_SHORT).show()
+            startActivity(Intent(this, EditarPerfilActivity::class.java))
         }
 
         btnCambiarPassword.setOnClickListener {
