@@ -17,21 +17,18 @@ class MisOrdenesActivity : AppCompatActivity() {
     private lateinit var tvTotalOrdenes: TextView
     private lateinit var tvCompletadas: TextView
     private lateinit var tvPendientes: TextView
-    private lateinit var btnSeguirComprando: Button
     private lateinit var btnExplorar: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_mis_ordenes)
 
-        // IDs que existen en tu layout
-        toolbar = findViewById(R.id.toolbar)  // ← NECESITAS AGREGAR toolbar EN EL LAYOUT
+        toolbar = findViewById(R.id.toolbar)
         rvOrdenes = findViewById(R.id.rvOrdenes)
         layoutVacio = findViewById(R.id.layoutVacio)
         tvTotalOrdenes = findViewById(R.id.tvTotalOrdenes)
         tvCompletadas = findViewById(R.id.tvCompletadas)
         tvPendientes = findViewById(R.id.tvPendientes)
-        btnSeguirComprando = findViewById(R.id.btnSeguirComprando)
         btnExplorar = findViewById(R.id.btnExplorar)
 
         setupToolbar()
@@ -59,10 +56,6 @@ class MisOrdenesActivity : AppCompatActivity() {
     }
 
     private fun setupClickListeners() {
-        btnSeguirComprando.setOnClickListener {
-            startActivity(Intent(this, ListadoEmprendimientosActivity::class.java))
-        }
-
         btnExplorar.setOnClickListener {
             startActivity(Intent(this, ListadoEmprendimientosActivity::class.java))
         }

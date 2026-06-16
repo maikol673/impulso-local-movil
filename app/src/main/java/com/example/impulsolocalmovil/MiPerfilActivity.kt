@@ -89,7 +89,7 @@ class MiPerfilActivity : AppCompatActivity() {
         }
 
         btnCambiarPassword.setOnClickListener {
-            Toast.makeText(this, "Cambiar Contraseña - Próximamente", Toast.LENGTH_SHORT).show()
+            startActivity(Intent(this, CambiarPasswordActivity::class.java))
         }
 
         btnNuevoEmprendimiento.setOnClickListener {
