@@ -1,6 +1,7 @@
 package com.example.impulsolocalmovil
 
 import android.os.Bundle
+import android.content.Intent
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.LinearLayout
@@ -109,7 +110,9 @@ class DetalleEmprendimientoActivity : AppCompatActivity() {
 
     private fun setupClickListeners() {
         btnDejarResena.setOnClickListener {
-            // TODO: Navegar a agregar reseña
+            val intent = Intent(this, AgregarResenaActivity::class.java)
+            intent.putExtra("emprendimiento_nombre", tvNombre.text.toString())
+            startActivity(intent)
         }
 
         btnMeGusta.setOnClickListener {
