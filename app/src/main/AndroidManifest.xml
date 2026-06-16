@@ -107,6 +107,42 @@
             android:parentActivityName=".ChatActivity"
             android:exported="false" />
 
+        <!-- MiCarritoActivity -->
+        <activity
+            android:name=".MiCarritoActivity"
+            android:parentActivityName=".MainActivity"
+            android:exported="false" />
+
+        <!-- CheckoutActivity -->
+<!--        <activity-->
+<!--            android:name=".CheckoutActivity"-->
+<!--            android:parentActivityName=".MiCarritoActivity"-->
+<!--            android:exported="false" />-->
+
+        <!-- DetalleOrdenActivity -->
+<!--        <activity-->
+<!--            android:name=".DetalleOrdenActivity"-->
+<!--            android:parentActivityName=".MisOrdenesActivity"-->
+<!--            android:exported="false" />-->
+
+        <!-- AgregarProductoActivity -->
+<!--        <activity-->
+<!--            android:name=".AgregarProductoActivity"-->
+<!--            android:parentActivityName=".DetalleEmprendimientoActivity"-->
+<!--            android:exported="false" />-->
+
+        <!-- AgregarResenaActivity -->
+<!--        <activity-->
+<!--            android:name=".AgregarResenaActivity"-->
+<!--            android:parentActivityName=".DetalleEmprendimientoActivity"-->
+<!--            android:exported="false" />-->
+
+        <!-- AdminPanelActivity -->
+<!--        <activity-->
+<!--            android:name=".AdminPanelActivity"-->
+<!--            android:parentActivityName=".MainActivity"-->
+<!--            android:exported="false" />-->
+
     </application>
 
 </manifest>

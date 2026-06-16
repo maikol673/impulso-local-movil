@@ -104,6 +104,10 @@ class MainActivity : AppCompatActivity() {
                     startActivity(Intent(this, ChatActivity::class.java))
                 }
 
+                R.id.nav_mi_carrito -> {
+                    startActivity(Intent(this, MiCarritoActivity::class.java))
+                }
+
 //                R.id.nav_dashboard -> {
 //                    cargarFragment(HomeFragment())
 //                }
