@@ -126,10 +126,10 @@
             android:exported="false" />
 
         <!-- AgregarProductoActivity -->
-<!--        <activity-->
-<!--            android:name=".AgregarProductoActivity"-->
-<!--            android:parentActivityName=".DetalleEmprendimientoActivity"-->
-<!--            android:exported="false" />-->
+        <activity
+            android:name=".AgregarProductoActivity"
+            android:parentActivityName=".DetalleEmprendimientoActivity"
+            android:exported="false" />
 
         <!-- AgregarResenaActivity -->
         <activity

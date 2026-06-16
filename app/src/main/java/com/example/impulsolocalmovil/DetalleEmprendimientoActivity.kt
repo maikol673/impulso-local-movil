@@ -1,11 +1,12 @@
 package com.example.impulsolocalmovil
 
-import android.os.Bundle
 import android.content.Intent
+import android.os.Bundle
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import com.example.impulsolocalmovil.models.Emprendimiento
@@ -31,6 +32,7 @@ class DetalleEmprendimientoActivity : AppCompatActivity() {
     private lateinit var layoutEdicion: LinearLayout
     private lateinit var btnEditar: Button
     private lateinit var btnEliminar: Button
+    private lateinit var btnAgregarProducto: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -56,6 +58,7 @@ class DetalleEmprendimientoActivity : AppCompatActivity() {
         layoutEdicion = findViewById(R.id.layoutEdicion)
         btnEditar = findViewById(R.id.btnEditar)
         btnEliminar = findViewById(R.id.btnEliminar)
+        btnAgregarProducto = findViewById(R.id.btnAgregarProducto)
 
         setupToolbar()
 
@@ -64,6 +67,11 @@ class DetalleEmprendimientoActivity : AppCompatActivity() {
 
         if (emprendimiento != null) {
             mostrarDatos(emprendimiento)
+            // Mostrar opciones de edición solo si es el dueño
+            val sharedPref = getSharedPreferences("impulso_local_prefs", MODE_PRIVATE)
+            val userEmail = sharedPref.getString("user_email", null)
+            val esDuenno = userEmail == "admin@test.com" // Simulación
+            layoutEdicion.visibility = if (esDuenno) android.view.View.VISIBLE else android.view.View.GONE
         }
 
         setupClickListeners()
@@ -91,6 +99,7 @@ class DetalleEmprendimientoActivity : AppCompatActivity() {
             "destacado" -> {
                 tvDestacado.text = "Destacado"
                 tvDestacado.visibility = android.view.View.VISIBLE
+                tvDestacado.setBackgroundResource(R.drawable.bg_etiqueta_destacado)
             }
             "nuevo" -> {
                 tvDestacado.text = "Nuevo"
@@ -109,30 +118,43 @@ class DetalleEmprendimientoActivity : AppCompatActivity() {
     }
 
     private fun setupClickListeners() {
+        // Dejar Reseña
         btnDejarResena.setOnClickListener {
             val intent = Intent(this, AgregarResenaActivity::class.java)
             intent.putExtra("emprendimiento_nombre", tvNombre.text.toString())
             startActivity(intent)
         }
 
+        // Agregar Producto
+        btnAgregarProducto.setOnClickListener {
+            val intent = Intent(this, AgregarProductoActivity::class.java)
+            intent.putExtra("emprendimiento_nombre", tvNombre.text.toString())
+            startActivity(intent)
+        }
+
+        // Me Gusta
         btnMeGusta.setOnClickListener {
-            // TODO: Dar me gusta
+            Toast.makeText(this, "❤️ Me gusta", Toast.LENGTH_SHORT).show()
         }
 
+        // Contactar
         btnContactar.setOnClickListener {
-            // TODO: Abrir chat
+            Toast.makeText(this, "📞 Contactar", Toast.LENGTH_SHORT).show()
         }
 
+        // Seguir
         btnSeguir.setOnClickListener {
-            // TODO: Seguir emprendimiento
+            Toast.makeText(this, "👤 Siguiendo", Toast.LENGTH_SHORT).show()
         }
 
+        // Editar
         btnEditar.setOnClickListener {
-            // TODO: Editar emprendimiento
+            Toast.makeText(this, "✏ Editar emprendimiento", Toast.LENGTH_SHORT).show()
         }
 
+        // Eliminar
         btnEliminar.setOnClickListener {
-            // TODO: Eliminar emprendimiento
+            Toast.makeText(this, "🗑 Eliminar emprendimiento", Toast.LENGTH_SHORT).show()
         }
     }
 }

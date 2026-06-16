@@ -45,8 +45,8 @@
                     <FrameLayout
                         android:layout_width="match_parent"
                         android:layout_height="220dp"
-                        android:background="@color/gray_light"
-                        android:layout_marginBottom="16dp">
+                        android:layout_marginBottom="16dp"
+                        android:background="@color/gray_light">
 
                         <ImageView
                             android:id="@+id/ivImagen"
@@ -60,17 +60,17 @@
                             android:id="@+id/tvDestacado"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Destacado"
-                            android:paddingStart="12dp"
-                            android:paddingEnd="12dp"
-                            android:paddingTop="6dp"
-                            android:paddingBottom="6dp"
+                            android:layout_gravity="end"
+                            android:layout_margin="12dp"
                             android:background="@drawable/bg_etiqueta_destacado"
+                            android:paddingStart="12dp"
+                            android:paddingTop="6dp"
+                            android:paddingEnd="12dp"
+                            android:paddingBottom="6dp"
+                            android:text="Destacado"
                             android:textColor="@android:color/white"
                             android:textSize="12sp"
                             android:textStyle="bold"
-                            android:layout_margin="12dp"
-                            android:layout_gravity="end"
                             android:visibility="gone" />
 
                     </FrameLayout>
@@ -80,30 +80,30 @@
                         android:id="@+id/tvNombre"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="GreenTech Solutions"
-                        android:textSize="22sp"
-                        android:textStyle="bold"
-                        android:textColor="@color/text_primary"
                         android:layout_gravity="center"
-                        android:layout_marginBottom="12dp" />
+                        android:layout_marginBottom="12dp"
+                        android:text="GreenTech Solutions"
+                        android:textColor="@color/text_primary"
+                        android:textSize="22sp"
+                        android:textStyle="bold" />
 
                     <!-- Categoría (Badge) -->
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:layout_marginBottom="12dp">
+                        android:layout_marginBottom="12dp"
+                        android:gravity="center">
 
                         <TextView
                             android:id="@+id/tvCategoria"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Tecnología"
-                            android:paddingStart="16dp"
-                            android:paddingEnd="16dp"
-                            android:paddingTop="8dp"
-                            android:paddingBottom="8dp"
                             android:background="@drawable/bg_etiqueta_destacado"
+                            android:paddingStart="16dp"
+                            android:paddingTop="8dp"
+                            android:paddingEnd="16dp"
+                            android:paddingBottom="8dp"
+                            android:text="Tecnología"
                             android:textColor="@android:color/white"
                             android:textSize="14sp"
                             android:textStyle="bold" />
@@ -114,25 +114,25 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:layout_marginBottom="12dp">
+                        android:layout_marginBottom="12dp"
+                        android:gravity="center">
 
                         <TextView
                             android:id="@+id/tvRating"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="⭐ 4.8"
-                            android:textSize="16sp"
-                            android:textColor="@color/text_primary" />
+                            android:textColor="@color/text_primary"
+                            android:textSize="16sp" />
 
                         <TextView
                             android:id="@+id/tvNumResenas"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
                             android:text="(120 reseñas)"
-                            android:textSize="13sp"
                             android:textColor="@color/text_secondary"
-                            android:layout_marginStart="8dp" />
+                            android:textSize="13sp" />
 
                     </LinearLayout>
 
@@ -140,16 +140,16 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:layout_marginBottom="16dp">
+                        android:layout_marginBottom="16dp"
+                        android:gravity="center">
 
                         <TextView
                             android:id="@+id/tvUbicacion"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="📍 Bogotá, Colombia"
-                            android:textSize="14sp"
-                            android:textColor="@color/text_secondary" />
+                            android:textColor="@color/text_secondary"
+                            android:textSize="14sp" />
 
                     </LinearLayout>
 
@@ -158,38 +158,38 @@
                         android:id="@+id/btnDejarResena"
                         android:layout_width="match_parent"
                         android:layout_height="44dp"
-                        android:text="⭐ Dejar Reseña"
+                        android:layout_marginBottom="16dp"
                         android:backgroundTint="@color/warning"
+                        android:text="⭐ Dejar Reseña"
                         android:textColor="@android:color/white"
-                        android:textStyle="bold"
-                        android:layout_marginBottom="16dp" />
+                        android:textStyle="bold" />
 
                     <!-- ACCIONES: Me Gusta, Contactar -->
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:layout_marginBottom="12dp">
+                        android:layout_marginBottom="12dp"
+                        android:orientation="horizontal">
 
                         <Button
                             android:id="@+id/btnMeGusta"
                             android:layout_width="0dp"
                             android:layout_height="44dp"
+                            android:layout_marginEnd="8dp"
                             android:layout_weight="1"
-                            android:text="🤍 Me Gusta"
                             android:backgroundTint="@color/gray_light"
-                            android:textColor="@color/text_primary"
-                            android:layout_marginEnd="8dp" />
+                            android:text="🤍 Me Gusta"
+                            android:textColor="@color/text_primary" />
 
                         <Button
                             android:id="@+id/btnContactar"
                             android:layout_width="0dp"
                             android:layout_height="44dp"
+                            android:layout_marginStart="8dp"
                             android:layout_weight="1"
-                            android:text="📞 Contactar"
                             android:backgroundTint="@color/primary"
-                            android:textColor="@android:color/white"
-                            android:layout_marginStart="8dp" />
+                            android:text="📞 Contactar"
+                            android:textColor="@android:color/white" />
 
                     </LinearLayout>
 
@@ -197,10 +197,10 @@
                         android:id="@+id/btnSeguir"
                         android:layout_width="match_parent"
                         android:layout_height="44dp"
-                        android:text="👤 Seguir"
+                        android:layout_marginBottom="16dp"
                         android:backgroundTint="@color/gray_light"
-                        android:textColor="@color/text_primary"
-                        android:layout_marginBottom="16dp" />
+                        android:text="👤 Seguir"
+                        android:textColor="@color/text_primary" />
 
                     <!-- OPCIONES DE EDICIÓN (solo para el dueño) -->
                     <LinearLayout
@@ -214,21 +214,21 @@
                             android:id="@+id/btnEditar"
                             android:layout_width="0dp"
                             android:layout_height="44dp"
+                            android:layout_marginEnd="8dp"
                             android:layout_weight="1"
-                            android:text="✏ Editar"
                             android:backgroundTint="@color/warning"
-                            android:textColor="@android:color/white"
-                            android:layout_marginEnd="8dp" />
+                            android:text="✏ Editar"
+                            android:textColor="@android:color/white" />
 
                         <Button
                             android:id="@+id/btnEliminar"
                             android:layout_width="0dp"
                             android:layout_height="44dp"
+                            android:layout_marginStart="8dp"
                             android:layout_weight="1"
-                            android:text="🗑 Eliminar"
                             android:backgroundTint="@color/error"
-                            android:textColor="@android:color/white"
-                            android:layout_marginStart="8dp" />
+                            android:text="🗑 Eliminar"
+                            android:textColor="@android:color/white" />
 
                     </LinearLayout>
 
@@ -393,7 +393,7 @@
                             android:backgroundTint="@color/success"
                             android:textColor="@android:color/white"
                             android:textSize="11sp"
-                            android:visibility="gone" />
+                            android:visibility="visible" />
 
                     </LinearLayout>
 
