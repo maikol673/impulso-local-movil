@@ -71,7 +71,7 @@ class MiCarritoActivity : AppCompatActivity() {
         }
 
         btnFinalizar.setOnClickListener {
-            Toast.makeText(this, "Checkout - Próximamente", Toast.LENGTH_SHORT).show()
+            startActivity(Intent(this, CheckoutActivity::class.java))
         }
     }
 }

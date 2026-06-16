@@ -108,6 +108,10 @@ class MainActivity : AppCompatActivity() {
                     startActivity(Intent(this, MiCarritoActivity::class.java))
                 }
 
+                R.id.nav_mis_ordenes -> {
+                    startActivity(Intent(this, MisOrdenesActivity::class.java))
+                }
+
 //                R.id.nav_dashboard -> {
 //                    cargarFragment(HomeFragment())
 //                }
