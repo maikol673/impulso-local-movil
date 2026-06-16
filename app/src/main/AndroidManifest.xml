@@ -132,10 +132,10 @@
 <!--            android:exported="false" />-->
 
         <!-- AgregarResenaActivity -->
-<!--        <activity-->
-<!--            android:name=".AgregarResenaActivity"-->
-<!--            android:parentActivityName=".DetalleEmprendimientoActivity"-->
-<!--            android:exported="false" />-->
+        <activity
+            android:name=".AgregarResenaActivity"
+            android:parentActivityName=".DetalleEmprendimientoActivity"
+            android:exported="false" />
 
         <!-- AdminPanelActivity -->
         <activity
