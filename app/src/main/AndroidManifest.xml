@@ -149,6 +149,12 @@
             android:parentActivityName=".MiPerfilActivity"
             android:exported="false" />
 
+        <!--editar perfil-->
+        <activity
+            android:name=".EditarPerfilActivity"
+            android:parentActivityName=".MiPerfilActivity"
+            android:exported="false" />
+
     </application>
 
 </manifest>
