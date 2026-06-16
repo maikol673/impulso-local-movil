@@ -143,6 +143,12 @@
             android:parentActivityName=".MainActivity"
             android:exported="false" />
 
+        <!--cambiar contraseña-->
+        <activity
+            android:name=".CambiarPasswordActivity"
+            android:parentActivityName=".MiPerfilActivity"
+            android:exported="false" />
+
     </application>
 
 </manifest>
