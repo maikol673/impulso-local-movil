@@ -9,57 +9,68 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="16dp">
+        android:orientation="vertical">
 
-        <com.google.android.material.card.MaterialCardView
+        <!-- Toolbar -->
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/primary"
+            app:titleTextColor="@android:color/white"
+            app:navigationIcon="@drawable/ic_back"
+            app:navigationIconTint="@android:color/white" />
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:cardCornerRadius="12dp"
-            app:cardElevation="2dp">
+            android:orientation="vertical"
+            android:padding="16dp">
 
-            <LinearLayout
+            <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                app:cardCornerRadius="16dp"
+                app:cardElevation="4dp">
 
-                <!-- Header -->
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="16dp"
-                    android:background="@color/success"
-                    android:gravity="center_vertical">
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="➕ Agregar Producto"
-                        android:textSize="18sp"
-                        android:textStyle="bold"
-                        android:textColor="@android:color/white" />
-
-                </LinearLayout>
-
-                <!-- Formulario -->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:padding="20dp">
+                    android:padding="24dp">
 
+                    <!-- Título -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="➕ Agregar Producto"
+                        android:textSize="22sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/text_primary"
+                        android:layout_gravity="center"
+                        android:layout_marginBottom="8dp" />
+
+                    <!-- Nombre del emprendimiento -->
                     <TextView
                         android:id="@+id/tvEmprendimiento"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Emprendimiento: Nombre"
                         android:textSize="14sp"
-                        android:textStyle="bold"
-                        android:textColor="@color/text_primary"
-                        android:layout_marginBottom="20dp" />
+                        android:textColor="@color/text_secondary"
+                        android:layout_gravity="center"
+                        android:layout_marginBottom="24dp" />
 
                     <!-- Nombre Producto -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Nombre del Producto *"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/text_primary"
+                        android:layout_marginBottom="8dp" />
+
                     <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -70,12 +81,21 @@
                             android:id="@+id/etNombreProducto"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:hint="Nombre del Producto *"
+                            android:hint="Ej: Laptop Gaming"
                             android:inputType="textPersonName" />
 
                     </com.google.android.material.textfield.TextInputLayout>
 
                     <!-- Precio -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Precio *"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/text_primary"
+                        android:layout_marginBottom="8dp" />
+
                     <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -86,12 +106,21 @@
                             android:id="@+id/etPrecio"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:hint="Precio *"
+                            android:hint="Ej: 1299.99"
                             android:inputType="numberDecimal" />
 
                     </com.google.android.material.textfield.TextInputLayout>
 
                     <!-- Descripción -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Descripción *"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/text_primary"
+                        android:layout_marginBottom="8dp" />
+
                     <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -102,7 +131,7 @@
                             android:id="@+id/etDescripcion"
                             android:layout_width="match_parent"
                             android:layout_height="120dp"
-                            android:hint="Descripción *"
+                            android:hint="Describe el producto..."
                             android:gravity="top"
                             android:inputType="textMultiLine" />
 
@@ -115,35 +144,61 @@
                         android:orientation="horizontal"
                         android:layout_marginBottom="16dp">
 
-                        <com.google.android.material.textfield.TextInputLayout
+                        <LinearLayout
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:layout_marginEnd="8dp"
-                            style="@style/Widget.Material3.TextInputLayout.OutlinedBox">
+                            android:orientation="vertical">
 
-                            <com.google.android.material.textfield.TextInputEditText
-                                android:id="@+id/etStock"
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Stock *"
+                                android:textSize="14sp"
+                                android:textStyle="bold"
+                                android:textColor="@color/text_primary"
+                                android:layout_marginBottom="8dp" />
+
+                            <com.google.android.material.textfield.TextInputLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:hint="Stock *"
-                                android:inputType="number" />
+                                style="@style/Widget.Material3.TextInputLayout.OutlinedBox">
 
-                        </com.google.android.material.textfield.TextInputLayout>
+                                <com.google.android.material.textfield.TextInputEditText
+                                    android:id="@+id/etStock"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:hint="Ej: 10"
+                                    android:inputType="number" />
 
-                        <com.google.android.material.textfield.TextInputLayout
+                            </com.google.android.material.textfield.TextInputLayout>
+
+                        </LinearLayout>
+
+                        <LinearLayout
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:layout_marginStart="8dp"
-                            style="@style/Widget.Material3.TextInputLayout.OutlinedBox">
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Estado *"
+                                android:textSize="14sp"
+                                android:textStyle="bold"
+                                android:textColor="@color/text_primary"
+                                android:layout_marginBottom="8dp" />
 
                             <Spinner
                                 android:id="@+id/spinnerEstado"
                                 android:layout_width="match_parent"
-                                android:layout_height="wrap_content" />
+                                android:layout_height="56dp"
+                                android:background="@drawable/bg_editartexto" />
 
-                        </com.google.android.material.textfield.TextInputLayout>
+                        </LinearLayout>
 
                     </LinearLayout>
 
@@ -153,6 +208,7 @@
                         android:layout_height="wrap_content"
                         android:text="Imagen del Producto"
                         android:textSize="14sp"
+                        android:textStyle="bold"
                         android:textColor="@color/text_primary"
                         android:layout_marginBottom="8dp" />
 
@@ -160,7 +216,7 @@
                         android:id="@+id/btnSeleccionarImagen"
                         android:layout_width="match_parent"
                         android:layout_height="48dp"
-                        android:text="Seleccionar Imagen"
+                        android:text="Seleccionar imagen"
                         android:backgroundTint="@color/gray_light"
                         android:textColor="@color/text_primary"
                         android:layout_marginBottom="8dp" />
@@ -179,36 +235,36 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
-                        android:gravity="center"
-                        android:layout_marginTop="16dp">
-
-                        <Button
-                            android:id="@+id/btnCancelar"
-                            android:layout_width="0dp"
-                            android:layout_height="44dp"
-                            android:layout_weight="1"
-                            android:text="Cancelar"
-                            android:backgroundTint="@color/gray_light"
-                            android:textColor="@color/text_primary"
-                            android:layout_marginEnd="8dp" />
+                        android:layout_marginTop="8dp">
 
                         <Button
                             android:id="@+id/btnGuardar"
                             android:layout_width="0dp"
-                            android:layout_height="44dp"
+                            android:layout_height="48dp"
                             android:layout_weight="1"
-                            android:text="Agregar Producto"
+                            android:text="Guardar"
                             android:backgroundTint="@color/success"
                             android:textColor="@android:color/white"
+                            android:textStyle="bold"
+                            android:layout_marginEnd="8dp" />
+
+                        <Button
+                            android:id="@+id/btnCancelar"
+                            android:layout_width="0dp"
+                            android:layout_height="48dp"
+                            android:layout_weight="1"
+                            android:text="Cancelar"
+                            android:backgroundTint="@color/gray_light"
+                            android:textColor="@color/text_primary"
                             android:layout_marginStart="8dp" />
 
                     </LinearLayout>
 
                 </LinearLayout>
 
-            </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
 
-        </com.google.android.material.card.MaterialCardView>
+        </LinearLayout>
 
     </LinearLayout>
 
