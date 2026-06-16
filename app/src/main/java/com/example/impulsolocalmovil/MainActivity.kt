@@ -74,47 +74,36 @@ class MainActivity : AppCompatActivity() {
                     startActivity(Intent(this, LoginActivity::class.java))
                     finish()
                 }
-                R.id.nav_admin -> {
-                    // TODO: Ir a panel de administrador
-                }
                 R.id.nav_mi_perfil -> {
                     startActivity(Intent(this, MiPerfilActivity::class.java))
                 }
                 R.id.nav_mis_emprendimientos -> {
                     startActivity(Intent(this, MisEmprendimientosActivity::class.java))
                 }
-
                 R.id.nav_mis_favoritos -> {
                     startActivity(Intent(this, MisFavoritosActivity::class.java))
                 }
-
                 R.id.nav_mis_cursos -> {
                     startActivity(Intent(this, MisCursosActivity::class.java))
                 }
-
                 R.id.nav_mis_eventos -> {
                     startActivity(Intent(this, MisEventosActivity::class.java))
                 }
-
                 R.id.nav_ajustes -> {
                     startActivity(Intent(this, AjustesActivity::class.java))
                 }
-
                 R.id.nav_chat -> {
                     startActivity(Intent(this, ChatActivity::class.java))
                 }
-
                 R.id.nav_mi_carrito -> {
                     startActivity(Intent(this, MiCarritoActivity::class.java))
                 }
-
                 R.id.nav_mis_ordenes -> {
                     startActivity(Intent(this, MisOrdenesActivity::class.java))
                 }
-
-//                R.id.nav_dashboard -> {
-//                    cargarFragment(HomeFragment())
-//                }
+                R.id.nav_admin -> {
+                    startActivity(Intent(this, AdminPanelActivity::class.java))
+                }
                 else -> {
                     cargarFragment(HomeFragment())
                 }

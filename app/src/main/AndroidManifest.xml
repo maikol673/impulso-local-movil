@@ -119,7 +119,7 @@
             android:parentActivityName=".MiCarritoActivity"
             android:exported="false" />
 
-
+        <!--ordenes -->
         <activity
             android:name=".MisOrdenesActivity"
             android:parentActivityName=".MainActivity"
@@ -138,10 +138,10 @@
 <!--            android:exported="false" />-->
 
         <!-- AdminPanelActivity -->
-<!--        <activity-->
-<!--            android:name=".AdminPanelActivity"-->
-<!--            android:parentActivityName=".MainActivity"-->
-<!--            android:exported="false" />-->
+        <activity
+            android:name=".AdminPanelActivity"
+            android:parentActivityName=".MainActivity"
+            android:exported="false" />
 
     </application>
 
