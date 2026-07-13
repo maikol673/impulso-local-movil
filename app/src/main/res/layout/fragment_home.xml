@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <!-- HERO SECTION (igual a Django) -->
+        <!-- HERO SECTION -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -41,7 +41,7 @@
 
         </LinearLayout>
 
-        <!-- ACCIONES (igual a Django) -->
+        <!-- ACCIONES -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -66,7 +66,6 @@
                 android:gravity="center"
                 android:layout_marginTop="25dp">
 
-                <!-- Botón Ver Emprendimientos -->
                 <TextView
                     android:id="@+id/btnVerEmprendimientos"
                     android:layout_width="match_parent"
@@ -82,7 +81,6 @@
                     android:focusable="true"
                     android:layout_marginBottom="12dp" />
 
-                <!-- Botón Publicar Emprendimiento -->
                 <TextView
                     android:id="@+id/btnPublicar"
                     android:layout_width="match_parent"
@@ -101,7 +99,7 @@
 
         </LinearLayout>
 
-        <!-- FEATURES (Beneficios) - igual a Django -->
+        <!-- FEATURES (Beneficios) -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -128,6 +126,7 @@
 
                 <!-- Card Crecimiento -->
                 <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/cardCrecimiento"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_columnWeight="1"
@@ -173,6 +172,7 @@
 
                 <!-- Card Networking -->
                 <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/cardNetworking"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_columnWeight="1"
@@ -218,6 +218,7 @@
 
                 <!-- Card Formación -->
                 <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/cardFormacion"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_columnWeight="1"
@@ -272,7 +273,7 @@
 
         </LinearLayout>
 
-        <!-- TESTIMONIOS (igual a Django) -->
+        <!-- TESTIMONIOS -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -290,7 +291,6 @@
                 android:layout_gravity="center"
                 android:layout_marginBottom="30dp" />
 
-            <!-- Testimonio 1 -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -319,7 +319,6 @@
 
             </LinearLayout>
 
-            <!-- Testimonio 2 -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -348,7 +347,6 @@
 
             </LinearLayout>
 
-            <!-- Botón para agregar testimonio -->
             <TextView
                 android:id="@+id/btnAgregarTestimonio"
                 android:layout_width="match_parent"

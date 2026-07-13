@@ -155,6 +155,19 @@
             android:parentActivityName=".MiPerfilActivity"
             android:exported="false" />
 
+        <!--SECCION DE BENEFICIOS-->
+        <!--formacion-->
+        <activity
+            android:name=".FormacionActivity"
+            android:parentActivityName=".MainActivity"
+            android:exported="false" />
+
+        <!--networking-->
+        <activity
+            android:name=".NetworkingActivity"
+            android:parentActivityName=".MainActivity"
+            android:exported="false" />
+
     </application>
 
 </manifest>
