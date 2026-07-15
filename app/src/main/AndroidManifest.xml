@@ -2,6 +2,18 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <!-- ✅ PERMISO DE INTERNET (obligatorio) -->
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <!-- Permisos de almacenamiento -->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
+    <uses-permission android:name="android.permission.CAMERA" />
+
+    <!-- Para evitar error de hardware -->
+    <uses-feature android:name="android.hardware.camera" android:required="false" />
+    <uses-feature android:name="android.hardware.camera.autofocus" android:required="false" />
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -10,16 +22,183 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.ImpulsoLocalMovil">
+        android:theme="@style/Theme.ImpulsoLocalMovil"
+        tools:targetApi="31"
+        android:usesCleartextTraffic="true">  <!-- ✅ PARA HTTP -->
+
+        <!-- LoginActivity como pantalla principal -->
         <activity
-            android:name=".MainActivity"
-            android:exported="true">
+            android:name=".LoginActivity"
+            android:exported="true"
+            android:windowSoftInputMode="adjustResize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <!-- RegisterActivity para registrarse -->
+        <activity
+            android:name=".RegisterActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
+
+        <!-- MainActivity después del login -->
+        <activity
+            android:name=".MainActivity"
+            android:exported="false" />
+
+        <!-- ListadoEmprendimientosActivity -->
+        <activity
+            android:name=".ListadoEmprendimientosActivity"
+            android:parentActivityName=".MainActivity"
+            android:exported="false" />
+
+        <!-- detalle emprendimientos-->
+        <activity
+            android:name=".DetalleEmprendimientoActivity"
+            android:parentActivityName=".ListadoEmprendimientosActivity"
+            android:exported="false" />
+
+        <!--publicar emprendimientos-->
+        <activity
+            android:name=".PublicarEmprendimientoActivity"
+            android:parentActivityName=".MainActivity"
+            android:exported="false" />
+
+        <!-- mi perfil-->
+        <activity
+            android:name=".MiPerfilActivity"
+            android:parentActivityName=".MainActivity"
+            android:exported="false" />
+
+        <!--mis esprendimientos-->
+        <activity
+            android:name=".MisEmprendimientosActivity"
+            android:parentActivityName=".MainActivity"
+            android:exported="false" />
+
+        <!--mis favoritos-->
+        <activity
+            android:name=".MisFavoritosActivity"
+            android:parentActivityName=".MainActivity"
+            android:exported="false" />
+
+        <!--mis cursos-->
+        <activity
+            android:name=".MisCursosActivity"
+            android:parentActivityName=".MainActivity"
+            android:exported="false" />
+
+        <!--detalle cursos-->
+        <activity
+            android:name=".DetalleCursoActivity"
+            android:parentActivityName=".MisCursosActivity"
+            android:exported="false" />
+
+        <!-- mis eventos-->
+        <activity
+            android:name=".MisEventosActivity"
+            android:parentActivityName=".MainActivity"
+            android:exported="false" />
+
+        <!--detalle evento-->
+        <activity
+            android:name=".DetalleEventoActivity"
+            android:parentActivityName=".NetworkingActivity"
+            android:exported="false" />
+
+        <!--publicar testimonio-->
+        <activity
+            android:name=".CrearTestimonioActivity"
+            android:parentActivityName=".MainActivity"
+            android:exported="false" />
+
+        <!--ajustes -->
+        <activity
+            android:name=".AjustesActivity"
+            android:parentActivityName=".MainActivity"
+            android:exported="false" />
+
+        <!--chat-->
+        <activity
+            android:name=".ChatActivity"
+            android:parentActivityName=".MainActivity"
+            android:exported="false" />
+
+        <!-- ChatConversacionActivity -->
+        <activity
+            android:name=".ChatConversacionActivity"
+            android:parentActivityName=".ChatActivity"
+            android:exported="false" />
+
+        <!-- MiCarritoActivity -->
+        <activity
+            android:name=".MiCarritoActivity"
+            android:parentActivityName=".MainActivity"
+            android:exported="false" />
+
+        <!-- CheckoutActivity -->
+        <activity
+            android:name=".CheckoutActivity"
+            android:parentActivityName=".MiCarritoActivity"
+            android:exported="false" />
+
+        <!--ordenes -->
+        <activity
+            android:name=".MisOrdenesActivity"
+            android:parentActivityName=".MainActivity"
+            android:exported="false" />
+
+        <!--detalle orden-->
+        <activity
+            android:name=".DetalleOrdenActivity"
+            android:parentActivityName=".MisOrdenesActivity"
+            android:exported="false" />
+
+        <!-- AgregarProductoActivity -->
+        <activity
+            android:name=".AgregarProductoActivity"
+            android:parentActivityName=".DetalleEmprendimientoActivity"
+            android:exported="false" />
+
+        <!-- AgregarResenaActivity -->
+        <activity
+            android:name=".AgregarResenaActivity"
+            android:parentActivityName=".DetalleEmprendimientoActivity"
+            android:exported="false" />
+
+        <!-- AdminPanelActivity -->
+        <activity
+            android:name=".AdminPanelActivity"
+            android:parentActivityName=".MainActivity"
+            android:exported="false" />
+
+        <!--cambiar contraseña-->
+        <activity
+            android:name=".CambiarPasswordActivity"
+            android:parentActivityName=".MiPerfilActivity"
+            android:exported="false" />
+
+        <!--editar perfil-->
+        <activity
+            android:name=".EditarPerfilActivity"
+            android:parentActivityName=".MiPerfilActivity"
+            android:exported="false" />
+
+        <!--SECCION DE BENEFICIOS-->
+        <!--formacion-->
+        <activity
+            android:name=".FormacionActivity"
+            android:parentActivityName=".MainActivity"
+            android:exported="false" />
+
+        <!--networking-->
+        <activity
+            android:name=".NetworkingActivity"
+            android:parentActivityName=".MainActivity"
+            android:exported="false" />
+
     </application>
 
 </manifest>

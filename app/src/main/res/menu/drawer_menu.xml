@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/nav_mi_perfil"
+        android:icon="@drawable/ic_perfil"
+        android:title="Mi Perfil" />
+
+    <item
+        android:id="@+id/nav_mis_emprendimientos"
+        android:icon="@drawable/ic_store"
+        android:title="Mis Emprendimientos" />
+
+    <item
+        android:id="@+id/nav_mis_favoritos"
+        android:icon="@drawable/ic_favorite"
+        android:title="Mis Favoritos" />
+
+    <item
+        android:id="@+id/nav_mis_cursos"
+        android:icon="@drawable/ic_courses"
+        android:title="Mis Cursos" />
+
+    <item
+        android:id="@+id/nav_mis_eventos"
+        android:icon="@drawable/ic_event"
+        android:title="Mis Eventos" />
+
+    <item
+        android:id="@+id/nav_mis_ordenes"
+        android:icon="@drawable/ic_ordenes"
+        android:title="Mis Órdenes" />
+
+    <item
+        android:id="@+id/nav_chat"
+        android:icon="@drawable/ic_chat"
+        android:title="Chat" />
+
+    <item
+        android:id="@+id/nav_mi_carrito"
+        android:icon="@drawable/ic_carrito"
+        android:title="Mi Carrito" />
+
+    <item
+        android:id="@+id/nav_ajustes"
+        android:icon="@drawable/ic_ajustes"
+        android:title="Ajustes" />
+
+    <item
+        android:id="@+id/nav_admin"
+        android:icon="@drawable/ic_admin"
+        android:title="Administrador"
+        android:visible="false" />
+
+    <item
+        android:id="@+id/nav_login"
+        android:icon="@drawable/ic_login"
+        android:title="Iniciar Sesión"
+        android:visible="true" />
+
+    <item
+        android:id="@+id/nav_logout"
+        android:icon="@drawable/ic_logout"
+        android:title="Cerrar Sesión"
+        android:visible="false" />
+
+</menu>
