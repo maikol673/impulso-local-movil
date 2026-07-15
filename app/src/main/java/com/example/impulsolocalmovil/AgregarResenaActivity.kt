@@ -8,6 +8,10 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import com.example.impulsolocalmovil.api.RetrofitClient
+import com.example.impulsolocalmovil.models.ResenaRequest
+import com.example.impulsolocalmovil.utils.TokenManager
+import kotlinx.coroutines.*
 
 class AgregarResenaActivity : AppCompatActivity() {
 
@@ -25,11 +29,15 @@ class AgregarResenaActivity : AppCompatActivity() {
     private lateinit var btnPublicar: Button
     private lateinit var btnCancelar: Button
 
+    private lateinit var tokenManager: TokenManager
     private var calificacionSeleccionada = 0
+    private var emprendimientoId: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_agregar_resena)
+
+        tokenManager = TokenManager.getInstance(this)
 
         toolbar = findViewById(R.id.toolbar)
         tvTitulo = findViewById(R.id.tvTitulo)
@@ -51,6 +59,7 @@ class AgregarResenaActivity : AppCompatActivity() {
 
         // Recibir datos del intent
         val nombreEmprendimiento = intent.getStringExtra("emprendimiento_nombre") ?: "Este emprendimiento"
+        emprendimientoId = intent.getIntExtra("emprendimiento_id", 0)
         tvEmprendimiento.text = "para $nombreEmprendimiento"
     }
 
@@ -89,23 +98,75 @@ class AgregarResenaActivity : AppCompatActivity() {
     private fun setupClickListeners() {
         btnPublicar.setOnClickListener {
             val comentario = etComentario.text.toString().trim()
+            val usuarioId = tokenManager.getUser()?.id ?: 0
 
             when {
+                usuarioId == 0 -> {
+                    Toast.makeText(this, "Inicia sesión para dejar una reseña", Toast.LENGTH_SHORT).show()
+                }
+                emprendimientoId == 0 -> {
+                    Toast.makeText(this, "Error: emprendimiento no identificado", Toast.LENGTH_SHORT).show()
+                }
                 calificacionSeleccionada == 0 -> {
                     Toast.makeText(this, "Selecciona una calificación", Toast.LENGTH_SHORT).show()
                 }
-                comentario.isEmpty() -> {
-                    etComentario.error = "Escribe tu comentario"
+                comentario.length < 10 -> {
+                    etComentario.error = "El comentario debe tener al menos 10 caracteres"
                 }
                 else -> {
-                    Toast.makeText(this, "✅ Reseña publicada\nCalificación: $calificacionSeleccionada estrellas", Toast.LENGTH_LONG).show()
-                    finish()
+                    publicarResena(usuarioId, comentario)
                 }
             }
         }
 
         btnCancelar.setOnClickListener {
             finish()
+        }
+    }
+
+    private fun publicarResena(usuarioId: Int, comentario: String) {
+        btnPublicar.isEnabled = false
+
+        val request = ResenaRequest(
+            emprendimientoId = emprendimientoId,
+            usuarioId = usuarioId,
+            calificacion = calificacionSeleccionada,
+            comentario = comentario
+        )
+
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                val response = RetrofitClient.instance.crearResena(request)
+                withContext(Dispatchers.Main) {
+                    btnPublicar.isEnabled = true
+                    if (response.isSuccessful) {
+                        Toast.makeText(
+                            this@AgregarResenaActivity,
+                            "✅ Reseña publicada",
+                            Toast.LENGTH_LONG
+                        ).show()
+                        setResult(RESULT_OK)
+                        finish()
+                    } else {
+                        val errorBody = response.errorBody()?.string()
+                        val mensaje = if (response.code() == 400) {
+                            "Ya has reseñado este emprendimiento"
+                        } else {
+                            "❌ Error al publicar: $errorBody"
+                        }
+                        Toast.makeText(this@AgregarResenaActivity, mensaje, Toast.LENGTH_LONG).show()
+                    }
+                }
+            } catch (e: Exception) {
+                withContext(Dispatchers.Main) {
+                    btnPublicar.isEnabled = true
+                    Toast.makeText(
+                        this@AgregarResenaActivity,
+                        "❌ Error: ${e.message}",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            }
         }
     }
 }

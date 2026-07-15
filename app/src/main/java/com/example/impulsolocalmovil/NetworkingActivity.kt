@@ -1,10 +1,15 @@
 package com.example.impulsolocalmovil
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import com.example.impulsolocalmovil.api.RetrofitClient
+import com.example.impulsolocalmovil.models.AsistenciaRequest
+import com.example.impulsolocalmovil.utils.TokenManager
+import kotlinx.coroutines.*
 
 class NetworkingActivity : AppCompatActivity() {
 
@@ -16,9 +21,13 @@ class NetworkingActivity : AppCompatActivity() {
     private lateinit var btnEvento2: Button
     private lateinit var btnEvento3: Button
 
+    private lateinit var tokenManager: TokenManager
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_networking)
+
+        tokenManager = TokenManager.getInstance(this)
 
         toolbar = findViewById(R.id.toolbar)
         btnFacebook = findViewById(R.id.btnFacebook)
@@ -52,16 +61,25 @@ class NetworkingActivity : AppCompatActivity() {
             Toast.makeText(this, "🐦 Abriendo Twitter", Toast.LENGTH_SHORT).show()
         }
 
+        // ✅ Evento 1 - Ver Detalle
         btnEvento1.setOnClickListener {
-            Toast.makeText(this, "✅ Asistencia confirmada a Networking Bogotá", Toast.LENGTH_LONG).show()
+            val intent = Intent(this, DetalleEventoActivity::class.java)
+            intent.putExtra("evento_id", 1)
+            startActivity(intent)
         }
 
+        // ✅ Evento 2 - Ver Detalle
         btnEvento2.setOnClickListener {
-            Toast.makeText(this, "✅ Asistencia confirmada a Feria Medellín", Toast.LENGTH_LONG).show()
+            val intent = Intent(this, DetalleEventoActivity::class.java)
+            intent.putExtra("evento_id", 2)
+            startActivity(intent)
         }
 
+        // ✅ Evento 3 - Ver Detalle
         btnEvento3.setOnClickListener {
-            Toast.makeText(this, "🎯 Unido al Webinar de Marketing Digital", Toast.LENGTH_LONG).show()
+            val intent = Intent(this, DetalleEventoActivity::class.java)
+            intent.putExtra("evento_id", 3)
+            startActivity(intent)
         }
     }
 }

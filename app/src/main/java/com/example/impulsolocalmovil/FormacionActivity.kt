@@ -5,6 +5,10 @@ import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import com.example.impulsolocalmovil.api.RetrofitClient
+import com.example.impulsolocalmovil.models.EnrollRequest
+import com.example.impulsolocalmovil.utils.TokenManager
+import kotlinx.coroutines.*
 
 class FormacionActivity : AppCompatActivity() {
 
@@ -16,9 +20,13 @@ class FormacionActivity : AppCompatActivity() {
     private lateinit var btnInscribirse3: Button
     private lateinit var btnDetalle3: Button
 
+    private lateinit var tokenManager: TokenManager
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_formacion)
+
+        tokenManager = TokenManager.getInstance(this)
 
         toolbar = findViewById(R.id.toolbar)
         btnInscribirse1 = findViewById(R.id.btnInscribirse1)
@@ -41,7 +49,7 @@ class FormacionActivity : AppCompatActivity() {
 
     private fun setupClickListeners() {
         btnInscribirse1.setOnClickListener {
-            Toast.makeText(this, "📝 Inscrito en Marketing Digital", Toast.LENGTH_LONG).show()
+            inscribirCurso(1, "Marketing Digital")
         }
 
         btnDetalle1.setOnClickListener {
@@ -49,7 +57,7 @@ class FormacionActivity : AppCompatActivity() {
         }
 
         btnInscribirse2.setOnClickListener {
-            Toast.makeText(this, "📝 Inscrito en Escalabilidad Empresarial", Toast.LENGTH_LONG).show()
+            inscribirCurso(2, "Escalabilidad Empresarial")
         }
 
         btnDetalle2.setOnClickListener {
@@ -57,11 +65,63 @@ class FormacionActivity : AppCompatActivity() {
         }
 
         btnInscribirse3.setOnClickListener {
-            Toast.makeText(this, "📝 Inscrito en Finanzas para Emprendedores", Toast.LENGTH_LONG).show()
+            inscribirCurso(3, "Finanzas para Emprendedores")
         }
 
         btnDetalle3.setOnClickListener {
             Toast.makeText(this, "ℹ️ Detalles de Finanzas para Emprendedores", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    private fun inscribirCurso(cursoId: Int, cursoNombre: String) {
+        val usuarioId = tokenManager.getUser()?.id ?: 0
+
+        if (usuarioId == 0) {
+            Toast.makeText(this, "Inicia sesión para inscribirte", Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        btnInscribirse1.isEnabled = false
+        btnInscribirse2.isEnabled = false
+        btnInscribirse3.isEnabled = false
+
+        val request = EnrollRequest(cursoId, usuarioId)
+
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                val response = RetrofitClient.instance.enrollCourse(request)
+                withContext(Dispatchers.Main) {
+                    btnInscribirse1.isEnabled = true
+                    btnInscribirse2.isEnabled = true
+                    btnInscribirse3.isEnabled = true
+
+                    if (response.isSuccessful) {
+                        Toast.makeText(
+                            this@FormacionActivity,
+                            "✅ Inscrito en $cursoNombre",
+                            Toast.LENGTH_LONG
+                        ).show()
+                    } else {
+                        val errorBody = response.errorBody()?.string()
+                        Toast.makeText(
+                            this@FormacionActivity,
+                            "❌ Error: $errorBody",
+                            Toast.LENGTH_LONG
+                        ).show()
+                    }
+                }
+            } catch (e: Exception) {
+                withContext(Dispatchers.Main) {
+                    btnInscribirse1.isEnabled = true
+                    btnInscribirse2.isEnabled = true
+                    btnInscribirse3.isEnabled = true
+                    Toast.makeText(
+                        this@FormacionActivity,
+                        "❌ Error: ${e.message}",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            }
         }
     }
 }

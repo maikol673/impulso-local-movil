@@ -1,17 +1,20 @@
 package com.example.impulsolocalmovil
 
-
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.impulsolocalmovil.adapters.EmprendimientoAdapter
+import com.example.impulsolocalmovil.api.RetrofitClient
+import com.example.impulsolocalmovil.models.Categoria
 import com.example.impulsolocalmovil.models.Emprendimiento
+import kotlinx.coroutines.*
 
 class ListadoEmprendimientosActivity : AppCompatActivity() {
 
@@ -29,12 +32,12 @@ class ListadoEmprendimientosActivity : AppCompatActivity() {
     private lateinit var adapter: EmprendimientoAdapter
     private var listaCompleta = listOf<Emprendimiento>()
     private var categoriaActual = "Todos"
+    private val apiService = RetrofitClient.instance
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_listado_emprendimientos)
 
-        // Inicializar views
         toolbar = findViewById(R.id.toolbar)
         etBuscar = findViewById(R.id.etBuscar)
         btnBuscar = findViewById(R.id.btnBuscar)
@@ -55,16 +58,14 @@ class ListadoEmprendimientosActivity : AppCompatActivity() {
     private fun setupToolbar() {
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        toolbar.setNavigationOnClickListener {
-            onBackPressed()
-        }
+        toolbar.setNavigationOnClickListener { onBackPressed() }
         title = "Explorar Emprendimientos"
     }
 
     private fun setupRecyclerView() {
         adapter = EmprendimientoAdapter(emptyList()) { emprendimiento ->
             val intent = Intent(this, DetalleEmprendimientoActivity::class.java)
-            intent.putExtra("emprendimiento", emprendimiento)
+            intent.putExtra("emprendimiento_id", emprendimiento.id)
             startActivity(intent)
         }
         rvEmprendimientos.layoutManager = LinearLayoutManager(this)
@@ -83,22 +84,40 @@ class ListadoEmprendimientosActivity : AppCompatActivity() {
 
         chipTodos.setOnClickListener { filtrarPorCategoria("Todos") }
         chipTecnologia.setOnClickListener { filtrarPorCategoria("Tecnología") }
-        chipAlimentos.setOnClickListener { filtrarPorCategoria("Alimentos") }
+        chipAlimentos.setOnClickListener { filtrarPorCategoria("Alimentario y bebidas") }
         chipServicios.setOnClickListener { filtrarPorCategoria("Servicios") }
         chipModa.setOnClickListener { filtrarPorCategoria("Moda") }
         chipArtesanias.setOnClickListener { filtrarPorCategoria("Artesanías") }
     }
 
+    // ✅ Cargar emprendimientos desde API
     private fun cargarEmprendimientos() {
-        listaCompleta = listOf(
-            Emprendimiento(1, "GreenTech", "Tecnología", "Soluciones sostenibles para agricultura urbana", 4.8, "Bogotá, Colombia", "destacado", ""),
-            Emprendimiento(2, "EduSmart", "Tecnología", "Plataforma educativa con inteligencia artificial", 4.9, "Medellín, Colombia", "nuevo", ""),
-            Emprendimiento(3, "ArtesanaCo", "Artesanías", "Comercio digital para artesanos locales", 4.7, "Popayán, Colombia", "normal", ""),
-            Emprendimiento(4, "Alimentos SAS", "Alimentos", "Comida saludable y orgánica", 4.5, "Cali, Colombia", "destacado", ""),
-            Emprendimiento(5, "ModaExpress", "Moda", "Ropa sostenible y ética", 4.3, "Barranquilla, Colombia", "normal", ""),
-            Emprendimiento(6, "ServiQuick", "Servicios", "Servicios profesionales para emprendedores", 4.6, "Cartagena, Colombia", "nuevo", "")
-        )
-        filtrarPorCategoria("Todos")
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                val response = apiService.getVentures()
+                withContext(Dispatchers.Main) {
+                    if (response.isSuccessful) {
+                        val emprendimientos = response.body() ?: emptyList()
+                        listaCompleta = emprendimientos
+                        filtrarPorCategoria("Todos")
+                    } else {
+                        Toast.makeText(
+                            this@ListadoEmprendimientosActivity,
+                            "Error al cargar emprendimientos",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+                }
+            } catch (e: Exception) {
+                withContext(Dispatchers.Main) {
+                    Toast.makeText(
+                        this@ListadoEmprendimientosActivity,
+                        "Error de conexión: ${e.message}",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            }
+        }
     }
 
     private fun buscarEmprendimientos(query: String) {
@@ -111,11 +130,19 @@ class ListadoEmprendimientosActivity : AppCompatActivity() {
 
     private fun filtrarPorCategoria(categoria: String) {
         categoriaActual = categoria
+        android.util.Log.d("Filtro", "Filtrando por: $categoria")
+
         val filtrados = if (categoria == "Todos") {
             listaCompleta
         } else {
-            listaCompleta.filter { it.categoria == categoria }
+            listaCompleta.filter {
+                val nombre = it.categoria?.nombre
+                android.util.Log.d("Filtro", "Categoría en BD: $nombre")
+                nombre == categoria
+            }
         }
+
+        android.util.Log.d("Filtro", "Resultados: ${filtrados.size}")
         adapter.updateList(filtrados)
         actualizarEstiloChips()
     }

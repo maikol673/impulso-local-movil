@@ -9,9 +9,23 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.example.impulsolocalmovil.adapters.ProductoAdapter
+import com.example.impulsolocalmovil.api.RetrofitClient
+import com.example.impulsolocalmovil.models.AddToCartRequest
 import com.example.impulsolocalmovil.models.Emprendimiento
+import com.example.impulsolocalmovil.models.Producto
+import com.example.impulsolocalmovil.models.ToggleLikeRequest
+import com.example.impulsolocalmovil.utils.TokenManager
+import kotlinx.coroutines.*
 
 class DetalleEmprendimientoActivity : AppCompatActivity() {
+
+    companion object {
+        private const val BASE_URL = "http://172.20.10.6:8000"
+    }
 
     private lateinit var toolbar: Toolbar
     private lateinit var ivImagen: ImageView
@@ -33,12 +47,19 @@ class DetalleEmprendimientoActivity : AppCompatActivity() {
     private lateinit var btnEditar: Button
     private lateinit var btnEliminar: Button
     private lateinit var btnAgregarProducto: Button
+    private lateinit var rvProductos: RecyclerView
+
+    private lateinit var tokenManager: TokenManager
+    private var emprendimientoId: Int = 0
+    private var emprendimiento: Emprendimiento? = null
+    private lateinit var productoAdapter: ProductoAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detalle_emprendimiento)
 
-        // Inicializar views
+        tokenManager = TokenManager.getInstance(this)
+
         toolbar = findViewById(R.id.toolbar)
         ivImagen = findViewById(R.id.ivImagen)
         tvDestacado = findViewById(R.id.tvDestacado)
@@ -59,19 +80,14 @@ class DetalleEmprendimientoActivity : AppCompatActivity() {
         btnEditar = findViewById(R.id.btnEditar)
         btnEliminar = findViewById(R.id.btnEliminar)
         btnAgregarProducto = findViewById(R.id.btnAgregarProducto)
+        rvProductos = findViewById(R.id.rvProductos)
 
         setupToolbar()
 
-        // Recibir datos del intent
-        val emprendimiento = intent.getSerializableExtra("emprendimiento") as? Emprendimiento
-
-        if (emprendimiento != null) {
-            mostrarDatos(emprendimiento)
-            // Mostrar opciones de edición solo si es el dueño
-            val sharedPref = getSharedPreferences("impulso_local_prefs", MODE_PRIVATE)
-            val userEmail = sharedPref.getString("user_email", null)
-            val esDuenno = userEmail == "admin@test.com" // Simulación
-            layoutEdicion.visibility = if (esDuenno) android.view.View.VISIBLE else android.view.View.GONE
+        emprendimientoId = intent.getIntExtra("emprendimiento_id", 0)
+        if (emprendimientoId > 0) {
+            cargarDetalle()
+            cargarProductos()
         }
 
         setupClickListeners()
@@ -80,21 +96,132 @@ class DetalleEmprendimientoActivity : AppCompatActivity() {
     private fun setupToolbar() {
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        toolbar.setNavigationOnClickListener {
-            onBackPressed()
-        }
+        toolbar.setNavigationOnClickListener { onBackPressed() }
         title = ""
+    }
+
+    private fun cargarDetalle() {
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                val response = RetrofitClient.instance.getVentureById(emprendimientoId)
+                withContext(Dispatchers.Main) {
+                    if (response.isSuccessful) {
+                        emprendimiento = response.body()
+                        if (emprendimiento != null) {
+                            mostrarDatos(emprendimiento!!)
+                            verificarMeGusta()
+                        }
+                    } else {
+                        Toast.makeText(
+                            this@DetalleEmprendimientoActivity,
+                            "Error al cargar detalle",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+                }
+            } catch (e: Exception) {
+                withContext(Dispatchers.Main) {
+                    Toast.makeText(
+                        this@DetalleEmprendimientoActivity,
+                        "Error de conexión: ${e.message}",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            }
+        }
+    }
+
+    private fun cargarProductos() {
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                val response = RetrofitClient.instance.getProductsByVenture(emprendimientoId)
+                withContext(Dispatchers.Main) {
+                    if (response.isSuccessful) {
+                        val productos = response.body() ?: emptyList()
+                        if (productos.isNotEmpty()) {
+                            productoAdapter = ProductoAdapter(
+                                productos,
+                                onAgregarCarrito = { producto ->
+                                    agregarAlCarrito(producto)
+                                },
+                                onProductoEliminado = {
+                                    cargarProductos()
+                                }
+                            )
+                            rvProductos.layoutManager = LinearLayoutManager(this@DetalleEmprendimientoActivity)
+                            rvProductos.adapter = productoAdapter
+                        }
+                    }
+                }
+            } catch (e: Exception) {
+                // Error silencioso
+            }
+        }
+    }
+
+    private fun agregarAlCarrito(producto: Producto) {
+        val usuarioId = tokenManager.getUser()?.id ?: 0
+
+        if (usuarioId == 0) {
+            Toast.makeText(this, "Inicia sesión para agregar al carrito", Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        val request = AddToCartRequest(producto.id, usuarioId, 1)
+
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                val response = RetrofitClient.instance.addToCart(request)
+                withContext(Dispatchers.Main) {
+                    if (response.isSuccessful) {
+                        Toast.makeText(
+                            this@DetalleEmprendimientoActivity,
+                            "✅ Producto agregado al carrito",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    } else {
+                        Toast.makeText(
+                            this@DetalleEmprendimientoActivity,
+                            "❌ Error al agregar al carrito",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+                }
+            } catch (e: Exception) {
+                withContext(Dispatchers.Main) {
+                    Toast.makeText(
+                        this@DetalleEmprendimientoActivity,
+                        "❌ Error: ${e.message}",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            }
+        }
     }
 
     private fun mostrarDatos(emprendimiento: Emprendimiento) {
         tvNombre.text = emprendimiento.nombre
-        tvCategoria.text = emprendimiento.categoria
-        tvRating.text = "⭐ ${emprendimiento.rating}"
-        tvNumResenas.text = "(120 reseñas)"
-        tvUbicacion.text = "📍 ${emprendimiento.ubicacion}"
+        tvCategoria.text = emprendimiento.categoria?.nombre ?: "Sin categoría"
+        tvRating.text = "⭐ ${emprendimiento.calificacion ?: "4.5"}"
+        tvNumResenas.text = "(${emprendimiento.numResenas ?: 0} reseñas)"
+        tvUbicacion.text = "📍 ${emprendimiento.ubicacion ?: "Ubicación no especificada"}"
         tvDescripcion.text = emprendimiento.descripcion
 
-        // Configurar etiqueta destacado
+        // ✅ Cargar imagen con la estructura corregida
+        val imagenUrl = if (!emprendimiento.imagen.isNullOrEmpty()) {
+            val rutaLimpia = if (emprendimiento.imagen.startsWith("/")) emprendimiento.imagen else "/${emprendimiento.imagen}"
+            BASE_URL + rutaLimpia
+        } else {
+            null
+        }
+
+        Glide.with(this)
+            .load(imagenUrl)
+            .placeholder(R.drawable.ic_placeholder)
+            .error(R.drawable.ic_placeholder)
+            .centerCrop()
+            .into(ivImagen)
+
         when (emprendimiento.estado) {
             "destacado" -> {
                 tvDestacado.text = "Destacado"
@@ -111,50 +238,124 @@ class DetalleEmprendimientoActivity : AppCompatActivity() {
             }
         }
 
-        // Datos de contacto (ejemplo)
         tvEmail.text = "✉ Email: contacto@${emprendimiento.nombre.lowercase()}.com"
         tvTelefono.text = "📱 Teléfono: +57 300 123 4567"
         tvSitioWeb.text = "🌐 Web: www.${emprendimiento.nombre.lowercase()}.com"
     }
 
+    private fun verificarMeGusta() {
+        val usuarioId = tokenManager.getUser()?.id ?: 0
+        if (usuarioId == 0 || emprendimientoId == 0) return
+
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                val response = RetrofitClient.instance.getMyLikes(usuarioId)
+                withContext(Dispatchers.Main) {
+                    if (response.isSuccessful) {
+                        val likes = response.body() ?: emptyList()
+                        val existe = likes.any { it.emprendimientoId == emprendimientoId }
+                        if (existe) {
+                            btnMeGusta.text = "❤️ Me Gusta"
+                            btnMeGusta.setBackgroundColor(getColor(android.R.color.holo_red_light))
+                        } else {
+                            btnMeGusta.text = "🤍 Me Gusta"
+                            btnMeGusta.setBackgroundColor(getColor(R.color.gray_light))
+                        }
+                    }
+                }
+            } catch (e: Exception) {
+                // Error silencioso
+            }
+        }
+    }
+
     private fun setupClickListeners() {
-        // Dejar Reseña
         btnDejarResena.setOnClickListener {
-            val intent = Intent(this, AgregarResenaActivity::class.java)
-            intent.putExtra("emprendimiento_nombre", tvNombre.text.toString())
-            startActivity(intent)
+            Toast.makeText(this, "Dejar reseña", Toast.LENGTH_SHORT).show()
         }
 
-        // Agregar Producto
         btnAgregarProducto.setOnClickListener {
             val intent = Intent(this, AgregarProductoActivity::class.java)
             intent.putExtra("emprendimiento_nombre", tvNombre.text.toString())
+            intent.putExtra("emprendimiento_id", emprendimientoId)
             startActivity(intent)
         }
 
-        // Me Gusta
         btnMeGusta.setOnClickListener {
-            Toast.makeText(this, "❤️ Me gusta", Toast.LENGTH_SHORT).show()
+            darMeGusta()
         }
 
-        // Contactar
         btnContactar.setOnClickListener {
             Toast.makeText(this, "📞 Contactar", Toast.LENGTH_SHORT).show()
         }
 
-        // Seguir
         btnSeguir.setOnClickListener {
             Toast.makeText(this, "👤 Siguiendo", Toast.LENGTH_SHORT).show()
         }
 
-        // Editar
         btnEditar.setOnClickListener {
-            Toast.makeText(this, "✏ Editar emprendimiento", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "✏ Editar", Toast.LENGTH_SHORT).show()
         }
 
-        // Eliminar
         btnEliminar.setOnClickListener {
-            Toast.makeText(this, "🗑 Eliminar emprendimiento", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "🗑 Eliminar", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    private fun darMeGusta() {
+        val usuarioId = tokenManager.getUser()?.id ?: 0
+
+        if (usuarioId == 0) {
+            Toast.makeText(this, "Inicia sesión para dar me gusta", Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        if (emprendimientoId == 0) {
+            Toast.makeText(this, "Error: emprendimiento no identificado", Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        val request = ToggleLikeRequest(emprendimientoId, usuarioId)
+
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                val response = RetrofitClient.instance.toggleLike(request)
+                withContext(Dispatchers.Main) {
+                    if (response.isSuccessful) {
+                        val body = response.body()
+                        if (body != null) {
+                            val mensaje = if (body.liked) "❤️ Me gusta" else "💔 Quitado"
+                            Toast.makeText(
+                                this@DetalleEmprendimientoActivity,
+                                "$mensaje (${body.totalLikes} likes)",
+                                Toast.LENGTH_SHORT
+                            ).show()
+
+                            if (body.liked) {
+                                btnMeGusta.text = "❤️ Me Gusta"
+                                btnMeGusta.setBackgroundColor(getColor(android.R.color.holo_red_light))
+                            } else {
+                                btnMeGusta.text = "🤍 Me Gusta"
+                                btnMeGusta.setBackgroundColor(getColor(R.color.gray_light))
+                            }
+                        }
+                    } else {
+                        Toast.makeText(
+                            this@DetalleEmprendimientoActivity,
+                            "❌ Error al guardar",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+                }
+            } catch (e: Exception) {
+                withContext(Dispatchers.Main) {
+                    Toast.makeText(
+                        this@DetalleEmprendimientoActivity,
+                        "❌ Error: ${e.message}",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            }
         }
     }
 }

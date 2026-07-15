@@ -1,175 +1,436 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="#f8f9fa">
+    android:background="#f5f7fa"
+    android:fillViewport="true">
 
-    <!-- Header -->
-    <com.google.android.material.card.MaterialCardView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:cardCornerRadius="0dp"
-        android:elevation="4dp">
+        android:orientation="vertical">
+
+        <!-- Toolbar -->
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/primary"
+            app:titleTextColor="@android:color/white"
+            app:navigationIcon="@drawable/ic_back"
+            app:navigationIconTint="@android:color/white" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="16dp"
-            android:background="@color/primary"
-            android:gravity="center_vertical">
+            android:orientation="vertical"
+            android:padding="16dp">
 
-            <Button
-                android:id="@+id/btnMenuDrawer"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:text="☰"
-                android:backgroundTint="@android:color/transparent"
-                android:textColor="@android:color/white"
-                android:textSize="20sp" />
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Admin Panel"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                android:textColor="@android:color/white"
-                android:layout_marginStart="12dp" />
-
-            <TextView
-                android:id="@+id/tvStatusBadge"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="EN VIVO"
-                android:paddingStart="8dp"
-                android:paddingEnd="8dp"
-                android:paddingTop="4dp"
-                android:paddingBottom="4dp"
-                android:background="@drawable/bg_live_badge"
-                android:textColor="@android:color/white"
-                android:textSize="10sp"
-                android:textStyle="bold" />
-
-        </LinearLayout>
-
-    </com.google.android.material.card.MaterialCardView>
-
-    <!-- Sidebar Drawer -->
-    <androidx.drawerlayout.widget.DrawerLayout
-        android:id="@+id/drawerLayoutAdmin"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <!-- Contenido principal -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-
-            <!-- Tabs (horizontal scroll) -->
-            <HorizontalScrollView
+            <!-- Header -->
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:scrollbars="none"
-                android:background="@android:color/white"
-                android:elevation="2dp">
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="16dp">
 
-                <LinearLayout
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="👑 Panel de Administración"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/text_primary" />
+
+                <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:padding="8dp">
+                    android:text="🔐 Admin"
+                    android:paddingStart="12dp"
+                    android:paddingEnd="12dp"
+                    android:paddingTop="4dp"
+                    android:paddingBottom="4dp"
+                    android:background="@drawable/bg_chip_selected"
+                    android:textColor="@android:color/white"
+                    android:textSize="11sp" />
+
+            </LinearLayout>
+
+            <!-- Loading -->
+            <LinearLayout
+                android:id="@+id/layoutLoading"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:padding="40dp"
+                android:visibility="gone">
+
+                <ProgressBar
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:indeterminate="true" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Cargando datos..."
+                    android:textSize="14sp"
+                    android:textColor="@color/text_secondary"
+                    android:layout_marginTop="16dp" />
+
+            </LinearLayout>
+
+            <!-- Error -->
+            <LinearLayout
+                android:id="@+id/layoutError"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:padding="40dp"
+                android:visibility="gone">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="❌ Error al cargar datos"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/error" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="No se pudieron cargar los datos del administrador"
+                    android:textSize="14sp"
+                    android:textColor="@color/text_secondary"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="16dp" />
+
+                <Button
+                    android:id="@+id/btnReintentar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="44dp"
+                    android:text="🔄 Reintentar"
+                    android:backgroundTint="@color/primary"
+                    android:textColor="@android:color/white" />
+
+            </LinearLayout>
+
+            <!-- Stats Cards -->
+            <GridLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:columnCount="2"
+                android:rowCount="2"
+                android:layout_marginBottom="16dp">
+
+                <!-- Emprendimientos -->
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:layout_margin="4dp"
+                    app:cardCornerRadius="12dp"
+                    app:cardElevation="2dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:padding="16dp"
+                        android:gravity="center_vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="🚀"
+                            android:textSize="32sp"
+                            android:layout_marginEnd="12dp" />
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/tvTotalEmprendimientos"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="0"
+                                android:textSize="24sp"
+                                android:textStyle="bold"
+                                android:textColor="@color/primary" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Emprendimientos"
+                                android:textSize="12sp"
+                                android:textColor="@color/text_secondary" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </com.google.android.material.card.MaterialCardView>
+
+                <!-- Usuarios -->
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:layout_margin="4dp"
+                    app:cardCornerRadius="12dp"
+                    app:cardElevation="2dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:padding="16dp"
+                        android:gravity="center_vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="👥"
+                            android:textSize="32sp"
+                            android:layout_marginEnd="12dp" />
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/tvTotalUsuarios"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="0"
+                                android:textSize="24sp"
+                                android:textStyle="bold"
+                                android:textColor="@color/success" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Usuarios"
+                                android:textSize="12sp"
+                                android:textColor="@color/text_secondary" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </com.google.android.material.card.MaterialCardView>
+
+                <!-- Órdenes -->
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:layout_margin="4dp"
+                    app:cardCornerRadius="12dp"
+                    app:cardElevation="2dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:padding="16dp"
+                        android:gravity="center_vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="📦"
+                            android:textSize="32sp"
+                            android:layout_marginEnd="12dp" />
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/tvTotalOrdenes"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="0"
+                                android:textSize="24sp"
+                                android:textStyle="bold"
+                                android:textColor="@color/info" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Órdenes"
+                                android:textSize="12sp"
+                                android:textColor="@color/text_secondary" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </com.google.android.material.card.MaterialCardView>
+
+                <!-- Reseñas -->
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:layout_margin="4dp"
+                    app:cardCornerRadius="12dp"
+                    app:cardElevation="2dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:padding="16dp"
+                        android:gravity="center_vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="⭐"
+                            android:textSize="32sp"
+                            android:layout_marginEnd="12dp" />
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/tvTotalResenas"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="0"
+                                android:textSize="24sp"
+                                android:textStyle="bold"
+                                android:textColor="@color/warning" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Reseñas"
+                                android:textSize="12sp"
+                                android:textColor="@color/text_secondary" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </com.google.android.material.card.MaterialCardView>
+
+            </GridLayout>
+
+            <!-- Últimos Emprendimientos -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="2dp"
+                android:layout_marginBottom="16dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
 
                     <TextView
-                        android:id="@+id/tabDashboard"
                         android:layout_width="wrap_content"
-                        android:layout_height="40dp"
-                        android:text="Dashboard"
-                        android:paddingStart="20dp"
-                        android:paddingEnd="20dp"
-                        android:gravity="center"
-                        android:background="@drawable/bg_tab_active"
-                        android:textColor="@android:color/white"
-                        android:textSize="13sp"
-                        android:layout_marginEnd="4dp" />
+                        android:layout_height="wrap_content"
+                        android:text="📋 Últimos Emprendimientos"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/text_primary"
+                        android:layout_marginBottom="12dp" />
 
-                    <TextView
-                        android:id="@+id/tabUsuarios"
-                        android:layout_width="wrap_content"
-                        android:layout_height="40dp"
-                        android:text="Usuarios"
-                        android:paddingStart="20dp"
-                        android:paddingEnd="20dp"
-                        android:gravity="center"
-                        android:background="@drawable/bg_tab"
-                        android:textColor="@color/text_secondary"
-                        android:textSize="13sp"
-                        android:layout_marginEnd="4dp" />
-
-                    <TextView
-                        android:id="@+id/tabModeracion"
-                        android:layout_width="wrap_content"
-                        android:layout_height="40dp"
-                        android:text="Moderación"
-                        android:paddingStart="20dp"
-                        android:paddingEnd="20dp"
-                        android:gravity="center"
-                        android:background="@drawable/bg_tab"
-                        android:textColor="@color/text_secondary"
-                        android:textSize="13sp"
-                        android:layout_marginEnd="4dp" />
-
-                    <TextView
-                        android:id="@+id/tabAnalytics"
-                        android:layout_width="wrap_content"
-                        android:layout_height="40dp"
-                        android:text="Analytics"
-                        android:paddingStart="20dp"
-                        android:paddingEnd="20dp"
-                        android:gravity="center"
-                        android:background="@drawable/bg_tab"
-                        android:textColor="@color/text_secondary"
-                        android:textSize="13sp"
-                        android:layout_marginEnd="4dp" />
-
-                    <TextView
-                        android:id="@+id/tabSoporte"
-                        android:layout_width="wrap_content"
-                        android:layout_height="40dp"
-                        android:text="Soporte"
-                        android:paddingStart="20dp"
-                        android:paddingEnd="20dp"
-                        android:gravity="center"
-                        android:background="@drawable/bg_tab"
-                        android:textColor="@color/text_secondary"
-                        android:textSize="13sp" />
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rvRecentVentures"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
 
                 </LinearLayout>
 
-            </HorizontalScrollView>
+            </com.google.android.material.card.MaterialCardView>
 
-            <!-- FrameLayout para fragments/tabs -->
-            <FrameLayout
-                android:id="@+id/fragmentContainerAdmin"
+            <!-- Acciones Rápidas -->
+            <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:padding="12dp" />
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="2dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="⚡ Acciones Rápidas"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/text_primary"
+                        android:layout_marginBottom="12dp" />
+
+                    <GridLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:columnCount="2"
+                        android:rowCount="1">
+
+                        <Button
+                            android:id="@+id/btnVerEmprendimientos"
+                            android:layout_width="0dp"
+                            android:layout_height="48dp"
+                            android:layout_columnWeight="1"
+                            android:text="📋 Ver Emprendimientos"
+                            android:backgroundTint="@color/primary"
+                            android:textColor="@android:color/white"
+                            android:layout_margin="4dp" />
+
+                        <Button
+                            android:id="@+id/btnVerOrdenes"
+                            android:layout_width="0dp"
+                            android:layout_height="48dp"
+                            android:layout_columnWeight="1"
+                            android:text="📦 Ver Órdenes"
+                            android:backgroundTint="@color/success"
+                            android:textColor="@android:color/white"
+                            android:layout_margin="4dp" />
+
+                    </GridLayout>
+
+                    <Button
+                        android:id="@+id/btnVolver"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:text="← Volver"
+                        android:backgroundTint="@color/gray_light"
+                        android:textColor="@color/text_primary"
+                        android:layout_marginTop="8dp" />
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
 
         </LinearLayout>
 
-        <!-- Navigation Drawer (Sidebar) -->
-        <com.google.android.material.navigation.NavigationView
-            android:id="@+id/navigationViewAdmin"
-            android:layout_width="280dp"
-            android:layout_height="match_parent"
-            android:layout_gravity="start"
-            android:fitsSystemWindows="true"
-            app:menu="@menu/admin_drawer_menu"
-            app:headerLayout="@layout/nav_header_admin" />
+    </LinearLayout>
 
-    </androidx.drawerlayout.widget.DrawerLayout>
-
-</LinearLayout>
+</ScrollView>

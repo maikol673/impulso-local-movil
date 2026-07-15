@@ -11,7 +11,6 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <!-- Toolbar -->
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
@@ -27,7 +26,6 @@
             android:orientation="vertical"
             android:padding="16dp">
 
-            <!-- Menú lateral (horizontal scroll para móvil) -->
             <HorizontalScrollView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -106,7 +104,6 @@
                     android:orientation="vertical"
                     android:padding="20dp">
 
-                    <!-- Header con foto -->
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -114,7 +111,6 @@
                         android:gravity="center"
                         android:layout_marginBottom="20dp">
 
-                        <!-- Foto de perfil -->
                         <FrameLayout
                             android:id="@+id/flFotoPerfil"
                             android:layout_width="100dp"
@@ -151,7 +147,6 @@
 
                     </LinearLayout>
 
-                    <!-- Formulario -->
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -161,7 +156,6 @@
                         android:textColor="@color/text_primary"
                         android:layout_marginBottom="12dp" />
 
-                    <!-- Nombre -->
                     <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -177,23 +171,6 @@
 
                     </com.google.android.material.textfield.TextInputLayout>
 
-                    <!-- Apellido -->
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="12dp"
-                        style="@style/Widget.Material3.TextInputLayout.OutlinedBox">
-
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/etApellido"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:hint="Apellido *"
-                            android:inputType="textPersonName" />
-
-                    </com.google.android.material.textfield.TextInputLayout>
-
-                    <!-- Email -->
                     <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -209,7 +186,6 @@
 
                     </com.google.android.material.textfield.TextInputLayout>
 
-                    <!-- Teléfono -->
                     <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -225,7 +201,6 @@
 
                     </com.google.android.material.textfield.TextInputLayout>
 
-                    <!-- Fecha de Nacimiento -->
                     <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -241,7 +216,6 @@
 
                     </com.google.android.material.textfield.TextInputLayout>
 
-                    <!-- Información Adicional -->
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -252,7 +226,6 @@
                         android:layout_marginTop="8dp"
                         android:layout_marginBottom="12dp" />
 
-                    <!-- Ciudad -->
                     <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -268,7 +241,6 @@
 
                     </com.google.android.material.textfield.TextInputLayout>
 
-                    <!-- Sitio Web -->
                     <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -284,7 +256,6 @@
 
                     </com.google.android.material.textfield.TextInputLayout>
 
-                    <!-- Biografía -->
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -310,7 +281,6 @@
 
                     </com.google.android.material.textfield.TextInputLayout>
 
-                    <!-- Dirección -->
                     <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -326,7 +296,6 @@
 
                     </com.google.android.material.textfield.TextInputLayout>
 
-                    <!-- Preferencias -->
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -379,7 +348,6 @@
 
                     </LinearLayout>
 
-                    <!-- Botones -->
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"

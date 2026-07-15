@@ -1,11 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-<!--    <item-->
-<!--        android:id="@+id/nav_home"-->
-<!--        android:icon="@drawable/ic_home"-->
-<!--        android:title="Inicio" />-->
-
     <item
         android:id="@+id/nav_mi_perfil"
         android:icon="@drawable/ic_perfil"
@@ -36,7 +31,6 @@
         android:icon="@drawable/ic_ordenes"
         android:title="Mis Órdenes" />
 
-
     <item
         android:id="@+id/nav_chat"
         android:icon="@drawable/ic_chat"
@@ -46,7 +40,6 @@
         android:id="@+id/nav_mi_carrito"
         android:icon="@drawable/ic_carrito"
         android:title="Mi Carrito" />
-
 
     <item
         android:id="@+id/nav_ajustes"
@@ -58,7 +51,6 @@
         android:icon="@drawable/ic_admin"
         android:title="Administrador"
         android:visible="false" />
-
 
     <item
         android:id="@+id/nav_login"

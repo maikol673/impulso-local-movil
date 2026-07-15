@@ -7,8 +7,10 @@ import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.example.impulsolocalmovil.models.User
-import com.example.impulsolocalmovil.utils.SharedPrefManager
+import com.example.impulsolocalmovil.api.RetrofitClient
+import com.example.impulsolocalmovil.models.LoginRequest
+import com.example.impulsolocalmovil.utils.TokenManager
+import kotlinx.coroutines.*
 
 class LoginActivity : AppCompatActivity() {
 
@@ -16,58 +18,35 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var etPassword: EditText
     private lateinit var btnLogin: Button
     private lateinit var tvRegister: TextView
-    private lateinit var tvForgotPassword: TextView
-    private lateinit var btnGoogle: Button
-    private lateinit var btnFacebook: Button
+
+    private val apiService = RetrofitClient.instance
+    private lateinit var tokenManager: TokenManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
-        // Inicializar views con findViewById
+        tokenManager = TokenManager.getInstance(this)
+
+        if (tokenManager.isLoggedIn()) {
+            startActivity(Intent(this, MainActivity::class.java))
+            finish()
+        }
+
         etEmail = findViewById(R.id.etEmail)
         etPassword = findViewById(R.id.etPassword)
         btnLogin = findViewById(R.id.btnLogin)
         tvRegister = findViewById(R.id.tvRegister)
-        tvForgotPassword = findViewById(R.id.tvForgotPassword)
-        btnGoogle = findViewById(R.id.btnGoogle)
-        btnFacebook = findViewById(R.id.btnFacebook)
 
-        setupClickListeners()
-    }
-
-    private fun setupClickListeners() {
         btnLogin.setOnClickListener {
             val email = etEmail.text.toString().trim()
             val password = etPassword.text.toString().trim()
 
-            when {
-                email.isEmpty() -> {
-                    etEmail.error = "Ingresa tu correo electrónico"
-                }
-                password.isEmpty() -> {
-                    etPassword.error = "Ingresa tu contraseña"
-                }
-                else -> {
-                    performLogin(email, password)
-                }
+            if (email.isEmpty() || password.isEmpty()) {
+                Toast.makeText(this, "Completa todos los campos", Toast.LENGTH_SHORT).show()
+            } else {
+                performLogin(email, password)
             }
-        }
-
-        tvRegister.setOnClickListener {
-            Toast.makeText(this, "Próximamente: Pantalla de registro", Toast.LENGTH_SHORT).show()
-        }
-
-        tvForgotPassword.setOnClickListener {
-            Toast.makeText(this, "Próximamente: Recuperar contraseña", Toast.LENGTH_SHORT).show()
-        }
-
-        btnGoogle.setOnClickListener {
-            Toast.makeText(this, "Login con Google - Próximamente", Toast.LENGTH_SHORT).show()
-        }
-
-        btnFacebook.setOnClickListener {
-            Toast.makeText(this, "Login con Facebook - Próximamente", Toast.LENGTH_SHORT).show()
         }
 
         tvRegister.setOnClickListener {
@@ -76,33 +55,43 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun performLogin(email: String, password: String) {
-        val sharedPref = getSharedPreferences("impulso_local_prefs", MODE_PRIVATE)
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                val request = LoginRequest(email, password)
+                val response = apiService.login(request)
 
-        // Para pruebas: credenciales admin
-        if (email == "admin@test.com" && password == "123456") {
-            sharedPref.edit().apply {
-                putString("user_email", email)
-                putString("user_name", "Administrador")
-                putBoolean("is_admin", true)
-                apply()
+                withContext(Dispatchers.Main) {
+                    if (response.isSuccessful) {
+                        val body = response.body()
+                        if (body?.success == true && body.user != null) {
+                            val user = body.user
+
+                            // ✅ Guardar en TokenManager
+                            tokenManager.saveUser(user)
+                            tokenManager.saveToken(body.token ?: "temp_token")
+
+                            // ✅ Guardar en SharedPreferences para MainActivity
+                            val sharedPref = getSharedPreferences("impulso_local_prefs", MODE_PRIVATE)
+                            sharedPref.edit().apply {
+                                putString("user_email", user.email)
+                                putString("user_name", user.name)
+                                putBoolean("is_admin", user.isAdmin ?: false)
+                                apply()
+                            }
+
+                            Toast.makeText(
+                                this@LoginActivity,
+                                "✅ Login exitoso",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                            startActivity(Intent(this@LoginActivity, MainActivity::class.java))
+                            finish()
+                        }
+                    }
+                }
+            } catch (e: Exception) {
+                // Manejar error
             }
-            Toast.makeText(this, "Login Admin exitoso", Toast.LENGTH_SHORT).show()
-            startActivity(Intent(this, MainActivity::class.java))
-            finish()
-        }
-        // Credenciales normal
-        else if (email == "test@test.com" && password == "123456") {
-            sharedPref.edit().apply {
-                putString("user_email", email)
-                putString("user_name", "Usuario Test")
-                putBoolean("is_admin", false)
-                apply()
-            }
-            Toast.makeText(this, "Login exitoso", Toast.LENGTH_SHORT).show()
-            startActivity(Intent(this, MainActivity::class.java))
-            finish()
-        } else {
-            Toast.makeText(this, "Credenciales incorrectas", Toast.LENGTH_SHORT).show()
         }
     }
 }
