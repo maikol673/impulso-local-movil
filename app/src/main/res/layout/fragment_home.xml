@@ -99,7 +99,7 @@
 
         </LinearLayout>
 
-        <!-- FEATURES (Beneficios) -->
+        <!-- FEATURES (Beneficios) - SIN Crecimiento -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -124,51 +124,7 @@
                 android:rowCount="2"
                 android:useDefaultMargins="true">
 
-                <!-- Card Crecimiento -->
-                <com.google.android.material.card.MaterialCardView
-                    android:id="@+id/cardCrecimiento"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_columnWeight="1"
-                    app:cardCornerRadius="12dp"
-                    app:cardElevation="4dp"
-                    android:clickable="true"
-                    android:focusable="true">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:padding="20dp"
-                        android:gravity="center">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="📞"
-                            android:textSize="36sp" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Crecimiento"
-                            android:textSize="16sp"
-                            android:textStyle="bold"
-                            android:textColor="#212529"
-                            android:layout_marginTop="12dp" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Herramientas para escalar tu negocio de manera sostenible"
-                            android:textSize="11sp"
-                            android:textColor="#6c757d"
-                            android:gravity="center"
-                            android:layout_marginTop="8dp" />
-
-                    </LinearLayout>
-
-                </com.google.android.material.card.MaterialCardView>
+                <!-- ❌ ELIMINADA: Card Crecimiento -->
 
                 <!-- Card Networking -->
                 <com.google.android.material.card.MaterialCardView
@@ -262,7 +218,13 @@
 
                 </com.google.android.material.card.MaterialCardView>
 
-                <!-- Espacio para mantener grid 2x2 -->
+                <!-- Espacios para mantener grid 2x2 -->
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_columnWeight="1"
+                    android:visibility="invisible" />
+
                 <View
                     android:layout_width="0dp"
                     android:layout_height="0dp"
@@ -292,60 +254,43 @@
                 android:layout_marginBottom="30dp" />
 
             <LinearLayout
+                android:id="@+id/layoutNoTestimonios"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:background="#f8f9fa"
-                android:padding="20dp"
-                android:layout_marginBottom="16dp"
-                android:baselineAligned="false">
+                android:gravity="center"
+                android:padding="24dp"
+                android:visibility="gone">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Este ecosistema me ayudó a conectar con inversionistas para mi startup"
+                    android:text="📝"
+                    android:textSize="48sp"
+                    android:layout_marginBottom="8dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Aún no hay testimonios"
                     android:textSize="14sp"
-                    android:textColor="#212529"
-                    android:lineHeight="22sp" />
+                    android:textColor="@color/text_secondary" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="- Ana L., Fundadora de TechSolution"
+                    android:text="¡Sé el primero en compartir tu experiencia!"
                     android:textSize="12sp"
-                    android:textColor="#6c757d"
-                    android:layout_marginTop="12sp"
-                    android:fontStyle="italic" />
+                    android:textColor="@color/text_secondary" />
 
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/layoutTestimonios"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:background="#f8f9fa"
-                android:padding="20dp"
-                android:layout_marginBottom="24dp"
-                android:baselineAligned="false">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Los cursos me dieron las herramientas para triplicar mis ventas"
-                    android:textSize="14sp"
-                    android:textColor="#212529"
-                    android:lineHeight="22sp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="- Carlos M., Dueño de Panadería Dulce"
-                    android:textSize="12sp"
-                    android:textColor="#6c757d"
-                    android:layout_marginTop="12sp"
-                    android:fontStyle="italic" />
-
-            </LinearLayout>
+                android:visibility="gone" />
 
             <TextView
                 android:id="@+id/btnAgregarTestimonio"

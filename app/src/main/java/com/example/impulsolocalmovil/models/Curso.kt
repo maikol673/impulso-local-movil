@@ -1,12 +1,16 @@
 package com.example.impulsolocalmovil.models
 
+import com.google.gson.annotations.SerializedName
 import java.io.Serializable
 
 data class Curso(
-    val id: Int,
-    val nombre: String,
-    val descripcion: String,
-    val instructor: String,
-    val duracion: String,
-    val nivel: String
+    @SerializedName("id") val id: Int,
+    @SerializedName("nombre") val nombre: String,
+    @SerializedName("descripcion") val descripcion: String,
+    @SerializedName("instructor") val instructor: String,
+    @SerializedName("duracion") val duracion: String,
+    @SerializedName("nivel") val nivel: String,
+    @SerializedName("imagen") val imagen: String? = null,
+    @SerializedName("fecha_inicio") val fechaInicio: String? = null,
+    @SerializedName("estado") val estado: String? = null
 ) : Serializable

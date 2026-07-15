@@ -15,6 +15,7 @@ class UsuarioAdapter(
     class ViewHolder(itemView: android.view.View) : RecyclerView.ViewHolder(itemView) {
         val tvNombre: TextView = itemView.findViewById(R.id.tvNombre)
         val tvUsername: TextView = itemView.findViewById(R.id.tvUsername)
+        val tvAvatar: TextView = itemView.findViewById(R.id.tvAvatar)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -25,8 +26,10 @@ class UsuarioAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = items[position]
-        holder.tvNombre.text = item.nombre
-        holder.tvUsername.text = "@${item.username}"
+
+        holder.tvNombre.text = item.name  // Usar 'name' en lugar de 'nombre'
+        holder.tvUsername.text = "@${item.username ?: item.email}"
+        holder.tvAvatar.text = item.name.firstOrNull()?.toString()?.uppercase() ?: "U"
 
         holder.itemView.setOnClickListener {
             onItemClick(item)

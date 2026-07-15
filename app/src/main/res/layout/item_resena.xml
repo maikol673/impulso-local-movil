@@ -1,82 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:background="@color/gray_light_bg"
-    android:padding="16dp"
-    android:layout_marginBottom="12dp">
+    android:layout_marginBottom="12dp"
+    app:cardCornerRadius="12dp"
+    app:cardElevation="1dp">
 
-    <!-- Cabecera: Avatar + Nombre + Fecha -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center_vertical"
-        android:layout_marginBottom="12dp">
-
-        <FrameLayout
-            android:layout_width="40dp"
-            android:layout_height="40dp">
-<!--            android:background="@drawable/bg_circle_primary">-->
-
-            <TextView
-                android:id="@+id/tvAvatar"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="U"
-                android:textSize="18sp"
-                android:textColor="@android:color/white"
-                android:textStyle="bold"
-                android:layout_gravity="center" />
-
-        </FrameLayout>
+        android:orientation="vertical"
+        android:padding="14dp">
 
         <LinearLayout
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="vertical"
-            android:layout_marginStart="12dp">
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
 
             <TextView
-                android:id="@+id/tvResenaUsuario"
-                android:layout_width="wrap_content"
+                android:id="@+id/tvUsuario"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:text="Usuario"
                 android:textSize="14sp"
                 android:textStyle="bold"
                 android:textColor="@color/text_primary" />
 
             <TextView
-                android:id="@+id/tvResenaFecha"
+                android:id="@+id/tvEstrellas"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="01/06/2025"
-                android:textSize="11sp"
-                android:textColor="@color/text_secondary" />
+                android:text="★★★★★"
+                android:textSize="14sp"
+                android:textColor="@color/warning" />
 
         </LinearLayout>
 
-        <!-- Estrellas -->
-        <LinearLayout
-            android:id="@+id/llEstrellas"
-            android:layout_width="wrap_content"
+        <TextView
+            android:id="@+id/tvComentario"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:layout_marginTop="8dp"
+            android:text="Comentario"
+            android:textSize="13sp"
+            android:textColor="@color/text_secondary" />
 
-        </LinearLayout>
+        <TextView
+            android:id="@+id/tvFecha"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text=""
+            android:textSize="11sp"
+            android:textColor="@color/text_secondary" />
 
     </LinearLayout>
 
-    <!-- Comentario -->
-    <TextView
-        android:id="@+id/tvResenaComentario"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Comentario de la reseña..."
-        android:textSize="13sp"
-        android:textColor="@color/text_secondary"
-        android:lineHeight="20sp" />
-
-</LinearLayout>
+</com.google.android.material.card.MaterialCardView>

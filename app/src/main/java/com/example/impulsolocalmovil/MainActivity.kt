@@ -11,6 +11,7 @@ import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import com.example.impulsolocalmovil.fragments.HomeFragment
+import com.example.impulsolocalmovil.utils.TokenManager
 import com.google.android.material.navigation.NavigationView
 
 class MainActivity : AppCompatActivity() {
@@ -18,10 +19,20 @@ class MainActivity : AppCompatActivity() {
     private lateinit var drawerLayout: DrawerLayout
     private lateinit var navigationView: NavigationView
     private lateinit var toolbar: Toolbar
+    private lateinit var tokenManager: TokenManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        tokenManager = TokenManager.getInstance(this)
+
+        // ✅ Verificar autenticación
+        if (!tokenManager.isLoggedIn()) {
+            startActivity(Intent(this, LoginActivity::class.java))
+            finish()
+            return
+        }
 
         toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
@@ -33,21 +44,23 @@ class MainActivity : AppCompatActivity() {
         drawerLayout = findViewById(R.id.drawerLayout)
         navigationView = findViewById(R.id.navigationView)
 
-        val sharedPref = getSharedPreferences("impulso_local_prefs", MODE_PRIVATE)
-        val userEmail = sharedPref.getString("user_email", null)
-        val userName = sharedPref.getString("user_name", "Invitado")
-        val isAdmin = sharedPref.getBoolean("is_admin", false)
+        // ✅ Obtener usuario desde TokenManager
+        val user = tokenManager.getUser()
+        val isLoggedIn = tokenManager.isLoggedIn()
+        val isAdmin = tokenManager.isAdmin()  // ← USAR TokenManager
+        val userName = user?.name ?: "Invitado"
+        val userEmail = user?.email ?: "Inicia sesión"
 
+        // Actualizar header del drawer
         val headerView = navigationView.getHeaderView(0)
         val tvUserName = headerView.findViewById<TextView>(R.id.tvUserName)
         val tvUserEmail = headerView.findViewById<TextView>(R.id.tvUserEmail)
 
-        tvUserName.text = if (userEmail != null) userName else "Invitado"
-        tvUserEmail.text = if (userEmail != null) userEmail else "Inicia sesión"
+        tvUserName.text = if (isLoggedIn) userName else "Invitado"
+        tvUserEmail.text = if (isLoggedIn) userEmail else "Inicia sesión"
 
+        // Configurar menú
         val menu = navigationView.menu
-
-        val isLoggedIn = (userEmail != null)
 
         menu.findItem(R.id.nav_login)?.isVisible = !isLoggedIn
         menu.findItem(R.id.nav_logout)?.isVisible = isLoggedIn
@@ -61,8 +74,8 @@ class MainActivity : AppCompatActivity() {
         menu.findItem(R.id.nav_ajustes)?.isVisible = isLoggedIn
         menu.findItem(R.id.nav_mis_cursos)?.isVisible = isLoggedIn
         menu.findItem(R.id.nav_mis_eventos)?.isVisible = isLoggedIn
-//        menu.findItem(R.id.nav_dashboard)?.isVisible = isLoggedIn
 
+        // ✅ Manejar clics en el menú
         navigationView.setNavigationItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
                 R.id.nav_login -> {
@@ -70,7 +83,7 @@ class MainActivity : AppCompatActivity() {
                     finish()
                 }
                 R.id.nav_logout -> {
-                    sharedPref.edit().clear().apply()
+                    tokenManager.logout()
                     startActivity(Intent(this, LoginActivity::class.java))
                     finish()
                 }
@@ -113,6 +126,7 @@ class MainActivity : AppCompatActivity() {
         }
         navigationView.itemIconTintList = null
 
+        // ✅ Manejar botón atrás
         onBackPressedDispatcher.addCallback(this) {
             if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
                 drawerLayout.closeDrawer(GravityCompat.START)
@@ -122,6 +136,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+        // ✅ Cargar fragmento inicial
         if (savedInstanceState == null) {
             cargarFragment(HomeFragment())
         }

@@ -84,16 +84,18 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="24dp" />
 
-            <Button
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnExplorar"
                 android:layout_width="wrap_content"
                 android:layout_height="44dp"
                 android:text="Explorar Emprendimientos"
+                app:cornerRadius="22dp"
                 android:backgroundTint="@color/success"
                 android:textColor="@android:color/white" />
 
         </LinearLayout>
 
+        <!-- Resumen -->
         <LinearLayout
             android:id="@+id/layoutResumen"
             android:layout_width="match_parent"
@@ -130,30 +132,33 @@
 
             </LinearLayout>
 
-            <Button
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnActualizar"
                 android:layout_width="match_parent"
                 android:layout_height="44dp"
                 android:text="Actualizar Carrito"
+                app:cornerRadius="22dp"
                 android:backgroundTint="@color/primary"
                 android:textColor="@android:color/white"
                 android:layout_marginBottom="8dp" />
 
-            <Button
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnFinalizar"
                 android:layout_width="match_parent"
                 android:layout_height="44dp"
                 android:text="Finalizar Compra"
+                app:cornerRadius="22dp"
                 android:backgroundTint="@color/success"
                 android:textColor="@android:color/white"
                 android:textStyle="bold"
                 android:layout_marginBottom="8dp" />
 
-            <Button
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnSeguirComprando"
                 android:layout_width="match_parent"
                 android:layout_height="44dp"
                 android:text="Seguir Comprando"
+                app:cornerRadius="22dp"
                 android:backgroundTint="@color/gray_light"
                 android:textColor="@color/text_primary" />
 

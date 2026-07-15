@@ -6,11 +6,11 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.impulsolocalmovil.R
-import com.example.impulsolocalmovil.models.Curso
+import com.example.impulsolocalmovil.models.InscripcionCurso
 
 class CursoAdapter(
-    private var items: List<Curso>,
-    private val onItemClick: (Curso) -> Unit
+    private var items: List<InscripcionCurso>,
+    private val onItemClick: (InscripcionCurso) -> Unit
 ) : RecyclerView.Adapter<CursoAdapter.ViewHolder>() {
 
     class ViewHolder(itemView: android.view.View) : RecyclerView.ViewHolder(itemView) {
@@ -30,23 +30,27 @@ class CursoAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = items[position]
-        holder.tvNombre.text = item.nombre
-        holder.tvDescripcion.text = item.descripcion
-        holder.tvInstructor.text = "👨‍🏫 ${item.instructor}"
-        holder.tvDuracion.text = "⏱️ ${item.duracion}"
-        holder.tvNivel.text = item.nivel
+        val curso = item.curso
 
-        holder.btnVerDetalle.setOnClickListener {
-            onItemClick(item)
-        }
-        holder.itemView.setOnClickListener {
-            onItemClick(item)
+        if (curso != null) {
+            holder.tvNombre.text = curso.nombre
+            holder.tvDescripcion.text = curso.descripcion
+            holder.tvInstructor.text = "👨‍🏫 ${curso.instructor}"
+            holder.tvDuracion.text = "⏱️ ${curso.duracion}"
+            holder.tvNivel.text = curso.nivel
+
+            holder.btnVerDetalle.setOnClickListener {
+                onItemClick(item)
+            }
+            holder.itemView.setOnClickListener {
+                onItemClick(item)
+            }
         }
     }
 
     override fun getItemCount() = items.size
 
-    fun updateList(newItems: List<Curso>) {
+    fun updateList(newItems: List<InscripcionCurso>) {
         items = newItems
         notifyDataSetChanged()
     }

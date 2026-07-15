@@ -6,11 +6,11 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.impulsolocalmovil.R
-import com.example.impulsolocalmovil.models.Evento
+import com.example.impulsolocalmovil.models.AsistenciaEvento
 
 class EventoAdapter(
-    private var items: List<Evento>,
-    private val onItemClick: (Evento) -> Unit
+    private var items: List<AsistenciaEvento>,
+    private val onItemClick: (AsistenciaEvento) -> Unit
 ) : RecyclerView.Adapter<EventoAdapter.ViewHolder>() {
 
     class ViewHolder(itemView: android.view.View) : RecyclerView.ViewHolder(itemView) {
@@ -31,29 +31,37 @@ class EventoAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = items[position]
-        holder.tvNombre.text = item.nombre
-        holder.tvDescripcion.text = item.descripcion
-        holder.tvFecha.text = "📅 ${item.fecha}"
-        holder.tvHora.text = "⏰ ${item.hora}"
-        holder.tvModalidad.text = "🎯 ${item.modalidad}"
-        holder.tvEstado.text = item.estado
+        val evento = item.evento
 
-        when (item.estado) {
-            "confirmado" -> holder.tvEstado.setBackgroundResource(R.drawable.bg_estado_badge)
-            "pendiente" -> holder.tvEstado.setBackgroundResource(R.drawable.bg_estado_pendiente)
-        }
+        if (evento != null) {
+            holder.tvNombre.text = evento.nombre
+            holder.tvDescripcion.text = evento.descripcion
+            holder.tvFecha.text = "📅 ${evento.fecha}"
+            holder.tvHora.text = "⏰ ${evento.hora}"
+            holder.tvModalidad.text = "🎯 ${evento.tipo}"
 
-        holder.btnVerDetalle.setOnClickListener {
-            onItemClick(item)
-        }
-        holder.itemView.setOnClickListener {
-            onItemClick(item)
+            // ✅ Ahora usamos "asistio" (Boolean) en vez de "estado" (String)
+            val asistioConfirmado = item.asistio == true
+            holder.tvEstado.text = if (asistioConfirmado) "Confirmado" else "Pendiente"
+
+            if (asistioConfirmado) {
+                holder.tvEstado.setBackgroundResource(R.drawable.bg_estado_badge)
+            } else {
+                holder.tvEstado.setBackgroundResource(R.drawable.bg_estado_pendiente)
+            }
+
+            holder.btnVerDetalle.setOnClickListener {
+                onItemClick(item)
+            }
+            holder.itemView.setOnClickListener {
+                onItemClick(item)
+            }
         }
     }
 
     override fun getItemCount() = items.size
 
-    fun updateList(newItems: List<Evento>) {
+    fun updateList(newItems: List<AsistenciaEvento>) {
         items = newItems
         notifyDataSetChanged()
     }
